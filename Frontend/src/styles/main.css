@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-surface-bg: #0B0F17;
+    --color-surface-card: #111827;
+    --color-surface-border: #1E293B;
+    --color-accent-teal: #06B6D4;
+    --color-accent-cyan: #22D3EE;
+    --color-accent-amber: #F59E0B;
+    --color-accent-coral: #EF4444;
+  }
+
+  body {
+    background-color: var(--color-surface-bg);
+    color: #F1F5F9;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0F17;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1E293B;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+}
+
+@layer components {
+  .atmospheric-card {
+    @apply bg-aeris-900/80 backdrop-blur-md border border-aeris-800/80 rounded-xl transition-all duration-300;
+  }
+  .atmospheric-card:hover {
+    @apply border-aeris-700 shadow-surface-dark;
+  }
+  .editorial-card {
+    @apply bg-aeris-900/40 border border-aeris-800/60 rounded-xl transition-all duration-200;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-slate-950 bg-cyan-400 hover:bg-cyan-300 active:bg-cyan-500 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-aeris-950;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-slate-200 bg-aeris-800/80 hover:bg-aeris-700/80 active:bg-aeris-700 border border-aeris-700/60 transition-colors focus:outline-none focus:ring-2 focus:ring-aeris-500;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors focus:outline-none;
+  }
+  .badge-online {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-950/80 text-emerald-400 border border-emerald-800/60;
+  }
+  .badge-degraded {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-950/80 text-amber-400 border border-amber-800/60;
+  }
+  .badge-offline {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-950/80 text-rose-400 border border-rose-800/60;
+  }
+  .badge-critical {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-950/90 text-red-300 border border-red-800/80;
+  }
+  .badge-warning {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-950/90 text-amber-300 border border-amber-800/80;
+  }
+  .badge-info {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-950/90 text-cyan-300 border border-cyan-800/80;
+  }
+  .telemetry-value {
+    @apply font-mono font-semibold tracking-tight;
+  }
+}
+
+/* Atmospheric subtle scanline or subtle mesh animation */
+.bg-atmospheric-glow {
+  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+}
+
+.bg-hero-radial {
+  background: radial-gradient(circle at 50% 30%, rgba(14, 116, 144, 0.15) 0%, rgba(11, 15, 23, 0.8) 70%, #0B0F17 100%);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
