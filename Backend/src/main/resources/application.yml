@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: aerisence-backend
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+aerisence:
+  jwt:
+    secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+    expiration-ms: 86400000 # 24 hours
+  cors:
+    allowed-origins: "http://localhost:5173,http://localhost:3000,http://127.0.0.1:5173,http://127.0.0.1:3000,http://localhost:8080"
+  thresholds:
+    temperature:
+      min: -50.0
+      max: 60.0
+      max-delta-per-step: 10.0 # °C per observation interval
+    pressure:
+      min: 870.0
+      max: 1085.0
+      max-delta-per-step: 15.0 # hPa per observation interval
+    humidity:
+      min: 0.0
+      max: 100.0
+      max-delta-per-step: 30.0 # % per observation interval
+    persistence-steps: 5 # consecutive identical readings flagging sensor lock
