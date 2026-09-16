@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aerisence — Precision Weather Station Telemetry & Anomaly Intelligence</title>
+  <meta name="description" content="Aerisence is an operational meteorological intelligence platform monitoring automatic weather station networks, telemetry verification, and real-time physical anomaly detection." />
+  
+  <!-- Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="./src/styles/main.css" />
+</head>
+<body class="bg-aeris-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-cyan-500/20 selection:text-cyan-300">
+  
+  <!-- Application Shell -->
+  <div id="app" class="flex-1 flex flex-col min-h-screen">
+    <!-- Dynamic Header / Navbar rendered here -->
+    <header id="navbar-container" class="sticky top-0 z-50"></header>
+
+    <!-- Main Content View rendered here -->
+    <main id="view-container" class="flex-1 relative"></main>
+
+    <!-- Global Footer rendered here -->
+    <footer id="footer-container"></footer>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+
+  <!-- Global Modal Container -->
+  <div id="modal-container" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"></div>
+
+  <!-- Application Entrypoint -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
