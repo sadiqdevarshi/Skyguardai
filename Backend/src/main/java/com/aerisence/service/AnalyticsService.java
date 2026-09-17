@@ -2,7 +2,6 @@ package com.aerisence.service;
 
 import com.aerisence.dto.AnalyticsSummaryDto;
 import com.aerisence.entity.AnomalySeverity;
-import com.aerisence.entity.AnomalyStatus;
 import com.aerisence.repository.AlertRepository;
 import com.aerisence.repository.AnomalyRepository;
 import com.aerisence.repository.WeatherObservationRepository;

@@ -80,6 +80,7 @@ public class AnomalyDetectionService {
 
         // Update observation Quality Flag based on detection
         if (!detectedAnomalies.isEmpty()) {
+            logger.warn("Detected {} anomalies for station {} ({})", detectedAnomalies.size(), station.getStationCode(), station.getName());
             boolean hasCritical = detectedAnomalies.stream().anyMatch(a -> a.getSeverity() == AnomalySeverity.CRITICAL);
             currentObs.setQualityFlag(hasCritical ? QualityFlag.ANOMALOUS : QualityFlag.SUSPICIOUS);
             
