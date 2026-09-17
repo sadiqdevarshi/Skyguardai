@@ -80,6 +80,12 @@ export async function renderHomeView() {
         <p class="text-sm text-slate-400 leading-relaxed">
           Automatic Weather Stations operate in severe alpine, coastal, and desert environments. Sensor drift, ice accretion, electrical noise, and calibration loss occur silently. Aerisence detects and isolates these issues before flawed data enters downstream climate models.
         </p>
+        <div class="pt-1">
+          <a href="#/about" class="text-xs text-cyan-400 hover:text-cyan-300 font-mono inline-flex items-center space-x-1.5 transition-colors">
+            <span>Explore in-situ sensor failure modes & WMO-No. 8 physics</span>
+            <span>→</span>
+          </a>
+        </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
