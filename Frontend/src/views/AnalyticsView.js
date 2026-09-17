@@ -22,7 +22,9 @@ export async function renderAnalyticsView() {
         </div>
 
         <div class="flex items-center space-x-2 font-mono text-xs">
-          <span class="p-2 rounded-lg bg-subtle border border-border text-accent font-bold">WMO QUALITY: ${analytics.networkHealthPercentage}%</span>
+          <span class="p-2 rounded-lg bg-subtle border border-border text-content-secondary">
+            WMO QUALITY: <strong class="text-content-primary tabular-nums font-semibold">${analytics.networkHealthPercentage}%</strong>
+          </span>
         </div>
       </div>
 
@@ -36,7 +38,7 @@ export async function renderAnalyticsView() {
               <h3 class="text-sm font-bold text-content-primary">Anomalies by Atmospheric Parameter</h3>
               <span class="text-xs text-content-muted">Total detected incidents grouped by parameter channel</span>
             </div>
-            <span class="text-xs font-mono text-accent font-semibold">HISTOGRAM</span>
+            <span class="text-xs font-mono text-content-muted font-medium">HISTOGRAM</span>
           </div>
 
           <div class="w-full h-[240px]">
@@ -51,7 +53,7 @@ export async function renderAnalyticsView() {
               <h3 class="text-sm font-bold text-content-primary">Anomalies by Failure Classification</h3>
               <span class="text-xs text-content-muted">Spike vs Step Change vs Flatline Persistence</span>
             </div>
-            <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-semibold">CLASSIFICATION</span>
+            <span class="text-xs font-mono text-content-muted font-medium">CLASSIFICATION</span>
           </div>
 
           <div class="w-full h-[240px]">
@@ -84,16 +86,17 @@ export async function renderAnalyticsView() {
             <tbody>
               ${stations.map(st => {
                 const score = st.status === 'ONLINE' ? 98.5 : (st.status === 'DEGRADED' ? 72.0 : 40.0);
+                const sClass = st.status === 'ONLINE' ? 'status-online' : (st.status === 'DEGRADED' ? 'status-warning' : 'status-critical');
                 return `
                   <tr>
-                    <td class="font-mono font-bold text-accent">${st.stationCode}</td>
+                    <td class="font-mono font-medium text-content-primary">${st.stationCode}</td>
                     <td class="font-medium text-content-primary">${st.name}</td>
-                    <td>${st.region}</td>
-                    <td class="font-mono text-emerald-600 dark:text-emerald-400">${st.batteryLevel}%</td>
-                    <td class="font-mono font-bold ${st.activeAnomalyCount > 0 ? 'text-amber-600 dark:text-amber-400' : 'text-content-muted'}">${st.activeAnomalyCount}</td>
-                    <td class="font-mono font-bold ${score > 90 ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}">${score}%</td>
+                    <td class="text-content-secondary">${st.region}</td>
+                    <td class="font-mono text-content-primary tabular-nums">${st.batteryLevel}%</td>
+                    <td class="font-mono text-content-primary tabular-nums">${st.activeAnomalyCount}</td>
+                    <td class="font-mono text-content-primary tabular-nums font-medium">${score}%</td>
                     <td>
-                      <span class="${st.status === 'ONLINE' ? 'badge-online' : 'badge-degraded'}">
+                      <span class="${sClass}">
                         ${st.status}
                       </span>
                     </td>
@@ -123,3 +126,4 @@ export async function renderAnalyticsView() {
 
   return container;
 }
+

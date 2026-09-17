@@ -4,16 +4,26 @@ import { themeManager } from './theme.js';
 function getChartColors() {
   const isDark = themeManager.getTheme() === 'dark';
   return {
-    gridColor: isDark ? 'rgba(51, 65, 85, 0.35)' : 'rgba(226, 232, 240, 0.8)',
+    gridColor: isDark ? 'rgba(51, 65, 85, 0.25)' : 'rgba(226, 232, 240, 0.7)',
     tickColor: isDark ? '#94A3B8' : '#64748B',
     tooltipBg: isDark ? '#18202D' : '#FFFFFF',
     tooltipTitle: isDark ? '#F8FAFC' : '#0F172A',
     tooltipBody: isDark ? '#CBD5E1' : '#334155',
     tooltipBorder: isDark ? '#263345' : '#E2E8F0',
-    tempColor: isDark ? '#F59E0B' : '#D97706',
-    presColor: isDark ? '#38BDF8' : '#0284C7',
-    humColor: isDark ? '#60A5FA' : '#2563EB',
-    errorColor: isDark ? '#F87171' : '#DC2626'
+    
+    // Controlled Scientific Palette:
+    // Primary observation line: neutral high-contrast slate
+    primaryLine: isDark ? '#94A3B8' : '#475569',
+    primaryArea: isDark ? 'rgba(148, 163, 184, 0.05)' : 'rgba(71, 85, 105, 0.04)',
+    
+    // Secondary telemetry series (subtle differentiation):
+    secondaryLine: isDark ? '#64748B' : '#64748B',
+    tertiaryLine: isDark ? '#4D6280' : '#94A3B8',
+    
+    // Semantic anomaly / alert indicator:
+    anomalyColor: isDark ? '#F87171' : '#DC2626',
+    warningColor: isDark ? '#FBBF24' : '#D97706',
+    accentColor: isDark ? '#2DD4BF' : '#0F766E'
   };
 }
 
@@ -38,36 +48,39 @@ export function createTelemetryChart(canvas, observations, options = {}) {
         {
           label: 'Temperature (°C)',
           data: temperatures,
-          borderColor: c.tempColor,
-          backgroundColor: 'rgba(217, 119, 6, 0.08)',
-          borderWidth: 2,
-          pointRadius: 2,
-          pointHoverRadius: 5,
-          tension: 0.3,
+          borderColor: c.primaryLine,
+          backgroundColor: c.primaryArea,
+          borderWidth: 1.5,
+          pointRadius: 1.5,
+          pointHoverRadius: 4,
+          pointBackgroundColor: c.primaryLine,
+          tension: 0.2,
           yAxisID: 'yTemp',
           fill: true
         },
         {
           label: 'Pressure (hPa)',
           data: pressures,
-          borderColor: c.presColor,
+          borderColor: c.secondaryLine,
           backgroundColor: 'transparent',
-          borderWidth: 2,
-          pointRadius: 2,
-          pointHoverRadius: 5,
-          tension: 0.3,
+          borderWidth: 1.5,
+          borderDash: [5, 4],
+          pointRadius: 1.5,
+          pointHoverRadius: 4,
+          pointBackgroundColor: c.secondaryLine,
+          tension: 0.2,
           yAxisID: 'yPres'
         },
         {
           label: 'Humidity (%)',
           data: humidities,
-          borderColor: c.humColor,
+          borderColor: c.tertiaryLine,
           backgroundColor: 'transparent',
           borderWidth: 1.5,
-          borderDash: [4, 4],
-          pointRadius: 2,
-          pointHoverRadius: 5,
-          tension: 0.3,
+          borderDash: [2, 2],
+          pointRadius: 0,
+          pointHoverRadius: 3,
+          tension: 0.2,
           yAxisID: 'yHum'
         }
       ]
@@ -82,9 +95,13 @@ export function createTelemetryChart(canvas, observations, options = {}) {
       plugins: {
         legend: {
           position: 'top',
+          align: 'end',
           labels: {
             color: c.tickColor,
-            font: { family: 'Plus Jakarta Sans', size: 11, weight: '500' }
+            font: { family: 'Plus Jakarta Sans', size: 11, weight: '500' },
+            boxWidth: 12,
+            boxHeight: 6,
+            usePointStyle: false
           }
         },
         tooltip: {
@@ -93,10 +110,9 @@ export function createTelemetryChart(canvas, observations, options = {}) {
           bodyColor: c.tooltipBody,
           borderColor: c.tooltipBorder,
           borderWidth: 1,
-          padding: 10,
+          padding: 8,
           boxPadding: 4,
-          usePointStyle: true,
-          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
+          usePointStyle: true
         }
       },
       scales: {
@@ -109,16 +125,16 @@ export function createTelemetryChart(canvas, observations, options = {}) {
           display: true,
           position: 'left',
           grid: { color: c.gridColor },
-          ticks: { color: c.tempColor, font: { family: 'JetBrains Mono', size: 10 } },
-          title: { display: true, text: 'Temp (°C)', color: c.tempColor, font: { size: 10 } }
+          ticks: { color: c.tickColor, font: { family: 'JetBrains Mono', size: 10 } },
+          title: { display: true, text: 'Temperature (°C)', color: c.tickColor, font: { size: 10, family: 'Plus Jakarta Sans' } }
         },
         yPres: {
           type: 'linear',
           display: true,
           position: 'right',
           grid: { drawOnChartArea: false },
-          ticks: { color: c.presColor, font: { family: 'JetBrains Mono', size: 10 } },
-          title: { display: true, text: 'hPa', color: c.presColor, font: { size: 10 } }
+          ticks: { color: c.tickColor, font: { family: 'JetBrains Mono', size: 10 } },
+          title: { display: true, text: 'Pressure (hPa)', color: c.tickColor, font: { size: 10, family: 'Plus Jakarta Sans' } }
         },
         yHum: {
           type: 'linear',
@@ -149,21 +165,21 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
   for (let i = 0; i < points; i++) {
     labels.push(`T-${points - 1 - i}m`);
     if (i < points - 2) {
-      const normal = baseVal + (Math.sin(i) * 0.8);
+      const normal = baseVal + (Math.sin(i) * 0.6);
       baseline.push(normal);
-      upperConfidence.push(normal + 3.0);
-      lowerConfidence.push(normal - 3.0);
-      observed.push(normal + (Math.random() * 0.4 - 0.2));
+      upperConfidence.push(normal + 2.5);
+      lowerConfidence.push(normal - 2.5);
+      observed.push(normal + (Math.random() * 0.3 - 0.15));
     } else if (i === points - 2) {
       baseline.push(baseVal);
-      upperConfidence.push(baseVal + 3.0);
-      lowerConfidence.push(baseVal - 3.0);
+      upperConfidence.push(baseVal + 2.5);
+      lowerConfidence.push(baseVal - 2.5);
       observed.push(targetVal);
     } else {
       baseline.push(baseVal);
-      upperConfidence.push(baseVal + 3.0);
-      lowerConfidence.push(baseVal - 3.0);
-      observed.push(targetVal - 2.0);
+      upperConfidence.push(baseVal + 2.5);
+      lowerConfidence.push(baseVal - 2.5);
+      observed.push(targetVal - 1.5);
     }
   }
 
@@ -175,39 +191,37 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
         {
           label: 'Observed Telemetry',
           data: observed,
-          borderColor: c.errorColor,
-          backgroundColor: 'rgba(239, 68, 68, 0.12)',
-          borderWidth: 2.5,
-          pointRadius: (ctx) => (ctx.dataIndex === points - 2 ? 6 : 3),
-          pointBackgroundColor: (ctx) => (ctx.dataIndex === points - 2 ? c.errorColor : '#F87171'),
-          pointBorderColor: '#FFF',
+          borderColor: c.primaryLine,
+          backgroundColor: 'transparent',
+          borderWidth: 1.75,
+          pointRadius: (ctx) => (ctx.dataIndex === points - 2 ? 5 : 2),
+          pointBackgroundColor: (ctx) => (ctx.dataIndex === points - 2 ? c.anomalyColor : c.primaryLine),
+          pointBorderColor: (ctx) => (ctx.dataIndex === points - 2 ? '#FFFFFF' : 'transparent'),
           pointBorderWidth: 1.5,
           fill: false,
-          tension: 0.2
+          tension: 0.15
         },
         {
           label: 'Expected Baseline',
           data: baseline,
-          borderColor: c.presColor,
-          borderWidth: 2,
-          borderDash: [5, 5],
+          borderColor: c.secondaryLine,
+          borderWidth: 1.5,
+          borderDash: [4, 4],
           pointRadius: 0,
           fill: false
         },
         {
-          label: 'Upper Confidence (95%)',
+          label: 'Confidence Band (95%)',
           data: upperConfidence,
-          borderColor: 'rgba(148, 163, 184, 0.3)',
-          borderWidth: 1,
+          borderColor: 'transparent',
           pointRadius: 0,
           fill: '+1',
-          backgroundColor: 'rgba(14, 165, 233, 0.05)'
+          backgroundColor: c.primaryArea
         },
         {
-          label: 'Lower Confidence (95%)',
+          label: 'Lower Bound',
           data: lowerConfidence,
-          borderColor: 'rgba(148, 163, 184, 0.3)',
-          borderWidth: 1,
+          borderColor: 'transparent',
           pointRadius: 0,
           fill: false
         }
@@ -219,7 +233,14 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
       plugins: {
         legend: {
           position: 'top',
-          labels: { color: c.tickColor, font: { family: 'Plus Jakarta Sans', size: 11 } }
+          align: 'end',
+          labels: {
+            color: c.tickColor,
+            font: { family: 'Plus Jakarta Sans', size: 10 },
+            boxWidth: 10,
+            boxHeight: 4,
+            filter: (item) => item.text !== 'Lower Bound'
+          }
         },
         tooltip: {
           backgroundColor: c.tooltipBg,
@@ -257,20 +278,9 @@ export function createDistributionChart(canvas, dataMap, label = 'Anomalies') {
       datasets: [{
         label,
         data: values,
-        backgroundColor: [
-          'rgba(15, 118, 110, 0.7)',
-          'rgba(217, 119, 6, 0.7)',
-          'rgba(37, 99, 235, 0.7)',
-          'rgba(225, 29, 72, 0.7)'
-        ],
-        borderColor: [
-          '#0F766E',
-          '#D97706',
-          '#2563EB',
-          '#E11D48'
-        ],
-        borderWidth: 1,
-        borderRadius: 4
+        backgroundColor: c.primaryLine,
+        borderRadius: 2,
+        barThickness: 24
       }]
     },
     options: {
@@ -282,7 +292,7 @@ export function createDistributionChart(canvas, dataMap, label = 'Anomalies') {
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: c.tickColor, font: { size: 10 } }
+          ticks: { color: c.tickColor, font: { family: 'Plus Jakarta Sans', size: 10 } }
         },
         y: {
           grid: { color: c.gridColor },

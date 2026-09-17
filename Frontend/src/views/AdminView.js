@@ -21,29 +21,29 @@ export async function renderAdminView() {
       <div class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-y-auto max-w-7xl">
         
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4">
           <div>
             <div class="flex items-center space-x-2">
-              <span class="badge-critical font-mono text-[10px]">ROOT ACCESS</span>
-              <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Administrative Operations Suite</h1>
+              <span class="status-critical font-mono text-[10px]">ROOT ACCESS</span>
+              <h1 class="text-xl sm:text-2xl font-bold text-content-primary tracking-tight">Administrative Operations Suite</h1>
             </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Role-based access control, JVM infrastructure telemetry, and security audit trail.</p>
+            <p class="text-xs text-content-secondary mt-0.5">Role-based access control, JVM infrastructure telemetry, and security audit trail.</p>
           </div>
 
           <div class="flex items-center space-x-2 text-xs font-mono">
-            <span class="p-2 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-emerald-700 dark:text-emerald-400 font-semibold">JVM: ${stats.systemStatus}</span>
+            <span class="p-2 rounded-lg bg-subtle border border-border text-content-secondary">JVM: <strong class="text-content-primary font-medium">${stats.systemStatus}</strong></span>
           </div>
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="flex space-x-2 border-b border-slate-200 dark:border-slate-800 text-xs font-mono">
-          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'USERS' ? 'border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-400' : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}" data-tab="USERS">
+        <div class="flex space-x-2 border-b border-border text-xs font-mono">
+          <button class="tab-btn px-4 py-2 font-medium border-b-2 transition-colors ${currentTab === 'USERS' ? 'border-accent text-accent font-semibold' : 'border-transparent text-content-muted hover:text-content-primary'}" data-tab="USERS">
             User Role Management (${users.length})
           </button>
-          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'SYSTEM' ? 'border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-400' : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}" data-tab="SYSTEM">
+          <button class="tab-btn px-4 py-2 font-medium border-b-2 transition-colors ${currentTab === 'SYSTEM' ? 'border-accent text-accent font-semibold' : 'border-transparent text-content-muted hover:text-content-primary'}" data-tab="SYSTEM">
             System & JVM Telemetry
           </button>
-          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'AUDIT' ? 'border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-400' : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}" data-tab="AUDIT">
+          <button class="tab-btn px-4 py-2 font-medium border-b-2 transition-colors ${currentTab === 'AUDIT' ? 'border-accent text-accent font-semibold' : 'border-transparent text-content-muted hover:text-content-primary'}" data-tab="AUDIT">
             Security Audit Trail (${auditLogs.length})
           </button>
         </div>
@@ -51,9 +51,9 @@ export async function renderAdminView() {
         <!-- Tab Content -->
         ${currentTab === 'USERS' ? `
           <div class="atmospheric-card p-5 space-y-4">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-              <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Authorized Users & Role Assignments</h3>
-              <span class="text-xs font-mono text-slate-500 dark:text-slate-400">ENFORCED VIA SPRING SECURITY</span>
+            <div class="flex items-center justify-between pb-2 border-b border-border">
+              <h3 class="text-sm font-bold text-content-primary">Authorized Users & Role Assignments</h3>
+              <span class="text-xs font-mono text-content-muted">ENFORCED VIA SPRING SECURITY</span>
             </div>
 
             <div class="overflow-x-auto">
@@ -71,17 +71,17 @@ export async function renderAdminView() {
                 <tbody class="font-mono">
                   ${users.map(u => `
                     <tr>
-                      <td class="font-bold text-teal-700 dark:text-teal-400">${u.username}</td>
-                      <td class="text-slate-800 dark:text-slate-200 font-sans">${u.fullName}</td>
-                      <td class="text-slate-500 dark:text-slate-400">${u.email}</td>
+                      <td class="font-bold text-content-primary">${u.username}</td>
+                      <td class="text-content-primary font-sans">${u.fullName}</td>
+                      <td class="text-content-secondary">${u.email}</td>
                       <td>
-                        <span class="px-2 py-0.5 rounded text-[10px] font-mono ${u.role === 'ROLE_ADMIN' ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-800' : (u.role === 'ROLE_OPERATOR' ? 'bg-teal-100 text-teal-800 dark:bg-teal-950/80 dark:text-teal-300 border border-teal-300 dark:border-teal-800' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-300 dark:border-slate-700')}">
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-subtle border border-border text-content-secondary">
                           ${u.role}
                         </span>
                       </td>
                       <td>
-                        <span class="${u.active ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'} font-semibold">
-                          ${u.active ? '● ACTIVE' : '○ DISABLED'}
+                        <span class="${u.active ? 'status-online' : 'text-content-muted font-mono'}">
+                          ${u.active ? 'ACTIVE' : 'DISABLED'}
                         </span>
                       </td>
                       <td class="text-right">
@@ -103,45 +103,45 @@ export async function renderAdminView() {
         ${currentTab === 'SYSTEM' ? `
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="atmospheric-card p-5 space-y-2">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">JVM MEMORY USAGE</span>
-              <div class="text-xl font-mono font-bold text-teal-700 dark:text-teal-400">${Math.round((stats.jvmMemoryTotalBytes - stats.jvmMemoryFreeBytes) / (1024 * 1024))} MB</div>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Allocated: ${Math.round(stats.jvmMemoryTotalBytes / (1024 * 1024))} MB</p>
+              <span class="text-[10px] font-mono text-content-muted uppercase">JVM MEMORY USAGE</span>
+              <div class="text-xl font-mono font-bold text-content-primary tabular-nums">${Math.round((stats.jvmMemoryTotalBytes - stats.jvmMemoryFreeBytes) / (1024 * 1024))} MB</div>
+              <p class="text-[11px] text-content-muted font-mono tabular-nums">Allocated: ${Math.round(stats.jvmMemoryTotalBytes / (1024 * 1024))} MB</p>
             </div>
 
             <div class="atmospheric-card p-5 space-y-2">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">AVAILABLE PROCESSORS</span>
-              <div class="text-xl font-mono font-bold text-amber-700 dark:text-amber-400">${stats.activeProcessors} Cores</div>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Multi-threaded Ingestion Engine</p>
+              <span class="text-[10px] font-mono text-content-muted uppercase">AVAILABLE PROCESSORS</span>
+              <div class="text-xl font-mono font-bold text-content-primary tabular-nums">${stats.activeProcessors} Cores</div>
+              <p class="text-[11px] text-content-muted font-mono">Multi-threaded Ingestion Engine</p>
             </div>
 
             <div class="atmospheric-card p-5 space-y-2">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">BACKEND SYSTEM RUNTIME</span>
-              <div class="text-xl font-mono font-bold text-emerald-600 dark:text-emerald-400">HEALTHY</div>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Java 26 / Spring Boot 3.3.4</p>
+              <span class="text-[10px] font-mono text-content-muted uppercase">BACKEND SYSTEM RUNTIME</span>
+              <div class="text-xl font-mono font-bold text-content-primary">HEALTHY</div>
+              <p class="text-[11px] text-content-muted font-mono">Java 26 / Spring Boot 3.3.4</p>
             </div>
           </div>
         ` : ''}
 
         ${currentTab === 'AUDIT' ? `
           <div class="atmospheric-card p-5 space-y-4">
-            <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-              <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">System Audit & Compliance Log</h3>
-              <span class="text-xs font-mono text-slate-500 dark:text-slate-400">IMMUTABLE LOG RECORD</span>
+            <div class="flex items-center justify-between pb-2 border-b border-border">
+              <h3 class="text-sm font-bold text-content-primary">System Audit & Compliance Log</h3>
+              <span class="text-xs font-mono text-content-muted">IMMUTABLE LOG RECORD</span>
             </div>
 
             <div class="space-y-2">
               ${auditLogs.map(log => `
-                <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-mono text-xs flex items-start justify-between">
+                <div class="p-3 rounded-lg bg-subtle border border-border font-mono text-xs flex items-start justify-between">
                   <div class="space-y-1">
                     <div class="flex items-center space-x-2">
-                      <span class="font-bold text-teal-700 dark:text-teal-400">${log.action}</span>
-                      <span class="text-slate-500">by</span>
-                      <span class="text-slate-900 dark:text-slate-200 font-bold">${log.username}</span>
-                      <span class="text-[10px] text-slate-500">(${log.entityType})</span>
+                      <span class="font-bold text-content-primary">${log.action}</span>
+                      <span class="text-content-muted">by</span>
+                      <span class="text-content-secondary font-bold">${log.username}</span>
+                      <span class="text-[10px] text-content-muted">(${log.entityType})</span>
                     </div>
-                    <p class="text-slate-600 dark:text-slate-300 font-sans text-xs">${log.details}</p>
+                    <p class="text-content-secondary font-sans text-xs">${log.details}</p>
                   </div>
-                  <span class="text-[10px] text-slate-500 shrink-0 ml-4">${new Date(log.timestamp).toLocaleString()}</span>
+                  <span class="text-[10px] text-content-muted shrink-0 ml-4 tabular-nums">${new Date(log.timestamp).toLocaleString()}</span>
                 </div>
               `).join('')}
             </div>
@@ -178,3 +178,4 @@ export async function renderAdminView() {
   updateView();
   return container;
 }
+

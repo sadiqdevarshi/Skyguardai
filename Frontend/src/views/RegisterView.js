@@ -6,18 +6,18 @@ export async function renderRegisterView() {
   container.className = 'w-full min-h-[80vh] flex items-center justify-center px-4 py-12';
 
   container.innerHTML = `
-    <div class="max-w-md w-full atmospheric-card p-8 space-y-6 relative overflow-hidden">
+    <div class="max-w-md w-full atmospheric-card p-6 sm:p-8 space-y-6 relative overflow-hidden">
       
       <div class="text-center space-y-2">
-        <h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Register Weather Operator</h2>
-        <p class="text-xs text-slate-500 dark:text-slate-400">Provision a new meteorological station operator account</p>
+        <h2 class="text-xl font-bold text-content-primary tracking-tight">Register Weather Operator</h2>
+        <p class="text-xs text-content-secondary">Provision a new meteorological station operator account</p>
       </div>
 
-      <div id="register-error" class="hidden p-3 rounded-lg bg-rose-50 dark:bg-rose-950/80 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 text-xs font-medium"></div>
+      <div id="register-error" class="hidden p-3 rounded-lg bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-medium"></div>
 
       <form id="register-form" class="space-y-4 text-xs">
         <div class="space-y-1.5">
-          <label class="block font-medium text-slate-700 dark:text-slate-300">Full Name</label>
+          <label class="block font-medium text-content-primary">Full Name</label>
           <input 
             type="text" 
             id="reg-fullname" 
@@ -28,7 +28,7 @@ export async function renderRegisterView() {
         </div>
 
         <div class="space-y-1.5">
-          <label class="block font-medium text-slate-700 dark:text-slate-300">Operator Username</label>
+          <label class="block font-medium text-content-primary">Operator Username</label>
           <input 
             type="text" 
             id="reg-username" 
@@ -39,7 +39,7 @@ export async function renderRegisterView() {
         </div>
 
         <div class="space-y-1.5">
-          <label class="block font-medium text-slate-700 dark:text-slate-300">Official Email</label>
+          <label class="block font-medium text-content-primary">Official Email</label>
           <input 
             type="email" 
             id="reg-email" 
@@ -50,7 +50,7 @@ export async function renderRegisterView() {
         </div>
 
         <div class="space-y-1.5">
-          <label class="block font-medium text-slate-700 dark:text-slate-300">Password</label>
+          <label class="block font-medium text-content-primary">Password</label>
           <input 
             type="password" 
             id="reg-password" 
@@ -61,7 +61,7 @@ export async function renderRegisterView() {
         </div>
 
         <div class="space-y-1.5">
-          <label class="block font-medium text-slate-700 dark:text-slate-300">Operational Role</label>
+          <label class="block font-medium text-content-primary">Operational Role</label>
           <select id="reg-role" class="form-input text-xs">
             <option value="ROLE_OPERATOR">Station Operator</option>
             <option value="ROLE_ANALYST">Meteorological Data Analyst</option>
@@ -74,8 +74,8 @@ export async function renderRegisterView() {
         </button>
       </form>
 
-      <div class="text-center text-xs text-slate-500 dark:text-slate-400">
-        Already have credentials? <a href="#/login" class="text-teal-700 dark:text-teal-400 font-medium hover:underline">Sign In</a>
+      <div class="text-center text-xs text-content-secondary">
+        Already have credentials? <a href="#/login" class="text-accent font-medium hover:underline">Sign In</a>
       </div>
 
     </div>
@@ -111,3 +111,4 @@ export async function renderRegisterView() {
 
   return container;
 }
+

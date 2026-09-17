@@ -9,6 +9,8 @@ export async function renderAlertsView() {
   container.className = 'flex-1 flex w-full min-h-[calc(100vh-4rem)]';
 
   const renderContent = () => {
+    const unackCount = alerts.filter(a => !a.acknowledged).length;
+
     return `
       ${renderSidebar('/alerts')}
 
@@ -22,46 +24,49 @@ export async function renderAlertsView() {
           </div>
 
           <div class="flex items-center space-x-2 font-mono text-xs">
-            <span class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-bold">
-              ${alerts.filter(a => !a.acknowledged).length} Unacknowledged
+            <span class="p-2 rounded-lg bg-subtle border border-border text-content-secondary">
+              <strong class="text-content-primary tabular-nums font-semibold">${unackCount}</strong> Unacknowledged
             </span>
           </div>
         </div>
 
         <!-- Alert Cards Feed -->
         <div class="space-y-3">
-          ${alerts.map(alert => `
-            <div class="atmospheric-card p-5 space-y-3 ${alert.acknowledged ? 'opacity-75' : (alert.severity === 'CRITICAL' ? 'border-rose-500/30' : 'border-amber-500/30')}">
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                <div class="flex items-center space-x-2.5">
-                  <span class="${alert.severity === 'CRITICAL' ? 'badge-critical' : 'badge-warning'} font-mono">${alert.severity}</span>
-                  <span class="font-mono font-bold text-accent text-xs">${alert.stationCode}</span>
-                  <h3 class="text-sm font-bold text-content-primary">${alert.title}</h3>
+          ${alerts.map(alert => {
+            const sevClass = alert.severity === 'CRITICAL' ? 'status-critical' : 'status-warning';
+            return `
+              <div class="atmospheric-card p-5 space-y-3 ${alert.acknowledged ? 'opacity-70' : ''}">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div class="flex items-center space-x-2.5">
+                    <span class="${sevClass} font-mono">${alert.severity}</span>
+                    <span class="font-mono text-xs px-2 py-0.5 rounded bg-subtle text-content-secondary border border-border">${alert.stationCode}</span>
+                    <h3 class="text-sm font-bold text-content-primary">${alert.title}</h3>
+                  </div>
+
+                  <div class="flex items-center space-x-3 text-xs font-mono text-content-muted">
+                    <span class="tabular-nums">${new Date(alert.createdAt).toLocaleString()}</span>
+                    ${alert.acknowledged ? `
+                      <span class="status-online">ACKNOWLEDGED (${alert.acknowledgedBy || 'operator'})</span>
+                    ` : `
+                      <button class="ack-btn btn-primary text-xs px-3 py-1 font-mono" data-id="${alert.id}">
+                        Acknowledge Alert
+                      </button>
+                    `}
+                  </div>
                 </div>
 
-                <div class="flex items-center space-x-3 text-xs font-mono text-content-muted">
-                  <span>${new Date(alert.createdAt).toLocaleString()}</span>
-                  ${alert.acknowledged ? `
-                    <span class="badge-online">ACKNOWLEDGED (${alert.acknowledgedBy || 'operator'})</span>
-                  ` : `
-                    <button class="ack-btn btn-primary text-xs px-3 py-1 font-mono" data-id="${alert.id}">
-                      Acknowledge Alert
-                    </button>
-                  `}
-                </div>
+                <p class="text-xs text-content-secondary leading-relaxed">${alert.message}</p>
+
+                ${alert.anomalyId ? `
+                  <div class="pt-2 border-t border-border flex justify-end">
+                    <a href="#/anomalies/${alert.anomalyId}" class="text-xs text-accent hover:underline font-medium">
+                      View Associated Anomaly Record →
+                    </a>
+                  </div>
+                ` : ''}
               </div>
-
-              <p class="text-xs text-content-secondary leading-relaxed">${alert.message}</p>
-
-              ${alert.anomalyId ? `
-                <div class="pt-2 border-t border-border flex justify-end">
-                  <a href="#/anomalies/${alert.anomalyId}" class="text-xs text-accent hover:underline font-medium">
-                    View Associated Anomaly Record →
-                  </a>
-                </div>
-              ` : ''}
-            </div>
-          `).join('')}
+            `;
+          }).join('')}
         </div>
 
       </div>
@@ -86,3 +91,4 @@ export async function renderAlertsView() {
   updateView();
   return container;
 }
+

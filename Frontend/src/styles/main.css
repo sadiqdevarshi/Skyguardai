@@ -6,7 +6,7 @@
   :root {
     /* ==========================================================================
        LIGHT THEME (Primary Scientific / Enterprise Direction)
-       Clean warm/cool whites, crisp neutral surfaces, restrained accents
+       Calm neutral whites, crisp surfaces, restrained single accent, semantic states
        ========================================================================== */
     --bg-canvas: #F8FAFC;
     --bg-subtle: #F1F5F9;
@@ -26,57 +26,36 @@
     --text-faint: #94A3B8;
     --text-inverted: #FFFFFF;
 
-    --accent-primary: #0F766E;        /* Scientific Teal */
-    --accent-primary-hover: #0D9488;
-    --accent-primary-subtle: #F0FDFA;
-    --accent-primary-border: #99F6E4;
+    /* Controlled Primary Accent (Restrained Deep Slate Teal) */
+    --accent-primary: #0F766E;
+    --accent-primary-hover: #115E59;
+    --accent-primary-subtle: rgba(15, 118, 110, 0.06);
+    --accent-primary-border: rgba(15, 118, 110, 0.2);
     --accent-primary-text: #0F766E;
 
-    --accent-interactive: #0284C7;    /* Slate Sky Blue */
-    --accent-interactive-hover: #0369A1;
+    --accent-interactive: #0F766E;
+    --accent-interactive-hover: #115E59;
 
-    /* Telemetry Domain Colors */
-    --telemetry-temp: #D97706;        /* Temperature Bronze */
-    --telemetry-temp-bg: #FEF3C7;
-    --telemetry-temp-border: #FDE68A;
-    --telemetry-pres: #0284C7;        /* Barometric Pressure Cyan */
-    --telemetry-pres-bg: #E0F2FE;
-    --telemetry-pres-border: #BAE6FD;
-    --telemetry-hum: #2563EB;         /* Relative Humidity Blue */
-    --telemetry-hum-bg: #DBEAFE;
-    --telemetry-hum-border: #BFDBFE;
+    /* Semantic Status (Used ONLY when communicating actual health/alert state) */
+    --status-online: #059669;
+    --status-warning: #D97706;
+    --status-critical: #DC2626;
+    --status-offline: #64748B;
 
-    /* Semantic Status Indicators */
-    --status-online-text: #047857;
-    --status-online-bg: #ECFDF5;
-    --status-online-border: #A7F3D0;
-
-    --status-degraded-text: #B45309;
-    --status-degraded-bg: #FFFBEB;
-    --status-degraded-border: #FDE68A;
-
-    --status-offline-text: #BE123C;
-    --status-offline-bg: #FFF1F2;
-    --status-offline-border: #FECDD3;
-
-    --status-critical-text: #991B1B;
-    --status-critical-bg: #FEF2F2;
-    --status-critical-border: #FECACA;
-
-    --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
-    --shadow-card-hover: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
-    --shadow-elevated: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+    --shadow-card: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+    --shadow-card-hover: 0 2px 4px -1px rgba(15, 23, 42, 0.06);
+    --shadow-elevated: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
   }
 
   .dark {
     /* ==========================================================================
        DARK THEME (Refined Neutral Charcoal / Graphite — NOT black/blue neon)
-       Deep charcoal canvas, comfortable contrast, subdued borders
+       Neutral charcoal canvas, comfortable contrast, subdued borders
        ========================================================================== */
     --bg-canvas: #0F141C;
-    --bg-subtle: #141B26;
+    --bg-subtle: #151C27;
     --bg-surface: #18202D;
-    --bg-surface-elevated: #1F293A;
+    --bg-surface-elevated: #1F2A3B;
     --bg-surface-hover: #222C3D;
     --bg-surface-active: #273447;
 
@@ -91,53 +70,31 @@
     --text-faint: #64748B;
     --text-inverted: #0F141C;
 
-    --accent-primary: #14B8A6;
-    --accent-primary-hover: #2DD4BF;
-    --accent-primary-subtle: rgba(20, 184, 166, 0.12);
-    --accent-primary-border: rgba(20, 184, 166, 0.28);
+    --accent-primary: #2DD4BF;
+    --accent-primary-hover: #14B8A6;
+    --accent-primary-subtle: rgba(45, 212, 191, 0.08);
+    --accent-primary-border: rgba(45, 212, 191, 0.2);
     --accent-primary-text: #2DD4BF;
 
-    --accent-interactive: #38BDF8;
-    --accent-interactive-hover: #7DD3FC;
+    --accent-interactive: #2DD4BF;
+    --accent-interactive-hover: #14B8A6;
 
-    /* Telemetry Domain Colors */
-    --telemetry-temp: #F59E0B;
-    --telemetry-temp-bg: rgba(245, 158, 11, 0.12);
-    --telemetry-temp-border: rgba(245, 158, 11, 0.25);
-    --telemetry-pres: #38BDF8;
-    --telemetry-pres-bg: rgba(56, 189, 248, 0.12);
-    --telemetry-pres-border: rgba(56, 189, 248, 0.25);
-    --telemetry-hum: #60A5FA;
-    --telemetry-hum-bg: rgba(96, 165, 250, 0.12);
-    --telemetry-hum-border: rgba(96, 165, 250, 0.25);
+    /* Semantic Status */
+    --status-online: #34D399;
+    --status-warning: #FBBF24;
+    --status-critical: #F87171;
+    --status-offline: #94A3B8;
 
-    /* Semantic Status Indicators */
-    --status-online-text: #34D399;
-    --status-online-bg: rgba(52, 211, 153, 0.12);
-    --status-online-border: rgba(52, 211, 153, 0.25);
-
-    --status-degraded-text: #FBBF24;
-    --status-degraded-bg: rgba(251, 191, 36, 0.12);
-    --status-degraded-border: rgba(251, 191, 36, 0.25);
-
-    --status-offline-text: #FB7185;
-    --status-offline-bg: rgba(251, 113, 133, 0.12);
-    --status-offline-border: rgba(251, 113, 133, 0.25);
-
-    --status-critical-text: #F87171;
-    --status-critical-bg: rgba(239, 68, 68, 0.12);
-    --status-critical-border: rgba(239, 68, 68, 0.25);
-
-    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
-    --shadow-card-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.35);
-    --shadow-elevated: 0 10px 20px -3px rgba(0, 0, 0, 0.45);
+    --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    --shadow-card-hover: 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+    --shadow-elevated: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
   }
 
   body {
     background-color: var(--bg-canvas);
     color: var(--text-primary);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-    transition: background-color 0.2s ease, color 0.2s ease;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
 
   /* Refined minimal scrollbar */
@@ -164,25 +121,24 @@
   .atmospheric-card {
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
     box-shadow: var(--shadow-card);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
   .atmospheric-card:hover {
     border-color: var(--border-strong);
-    box-shadow: var(--shadow-card-hover);
   }
 
   .editorial-card {
     background-color: var(--bg-subtle);
     border: 1px solid var(--border-default);
-    border-radius: 0.75rem;
+    border-radius: 0.5rem;
   }
 
   .elevated-card {
     background-color: var(--bg-surface-elevated);
     border: 1px solid var(--border-default);
-    border-radius: 0.875rem;
+    border-radius: 0.5rem;
     box-shadow: var(--shadow-elevated);
   }
 
@@ -193,34 +149,30 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem 1rem;
+    padding: 0.4375rem 0.875rem;
     font-size: 0.8125rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.25rem;
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     color: var(--text-inverted);
     background-color: var(--accent-primary);
     border: 1px solid transparent;
-    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    transition: background-color 0.15s ease;
     cursor: pointer;
   }
   .btn-primary:hover {
     background-color: var(--accent-primary-hover);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  .btn-primary:active {
-    transform: scale(0.99);
   }
 
   .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem 1rem;
+    padding: 0.4375rem 0.875rem;
     font-size: 0.8125rem;
     font-weight: 500;
     line-height: 1.25rem;
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     color: var(--text-secondary);
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
@@ -237,10 +189,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 0.625rem;
     font-size: 0.8125rem;
     font-weight: 500;
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     color: var(--text-muted);
     transition: background-color 0.15s ease, color 0.15s ease;
   }
@@ -253,10 +205,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5rem 1rem;
+    padding: 0.4375rem 0.875rem;
     font-size: 0.8125rem;
-    font-weight: 600;
-    border-radius: 0.5rem;
+    font-weight: 500;
+    border-radius: 0.375rem;
     color: #FFFFFF;
     background-color: #DC2626;
     border: 1px solid transparent;
@@ -267,84 +219,91 @@
   }
 
   /* ==========================================================================
-     METEOROLOGICAL & OPERATIONAL BADGES
+     RESTRAINED STATUS INDICATOR SYSTEM (Small Dot + Text, No Loud Pills)
      ========================================================================== */
-  .badge-online {
+  .badge-online, .status-online {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
+    gap: 0.375rem;
     font-size: 0.6875rem;
     font-weight: 600;
     font-family: var(--font-mono, monospace);
-    color: var(--status-online-text);
-    background-color: var(--status-online-bg);
-    border: 1px solid var(--status-online-border);
+    color: var(--status-online);
+  }
+  .badge-online::before, .status-online::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--status-online);
   }
 
-  .badge-degraded {
+  .badge-degraded, .badge-warning, .status-warning, .status-degraded {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
+    gap: 0.375rem;
     font-size: 0.6875rem;
     font-weight: 600;
     font-family: var(--font-mono, monospace);
-    color: var(--status-degraded-text);
-    background-color: var(--status-degraded-bg);
-    border: 1px solid var(--status-degraded-border);
+    color: var(--status-warning);
+  }
+  .badge-degraded::before, .badge-warning::before, .status-warning::before, .status-degraded::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--status-warning);
   }
 
-  .badge-offline {
+  .badge-critical, .status-critical {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
+    gap: 0.375rem;
     font-size: 0.6875rem;
     font-weight: 600;
     font-family: var(--font-mono, monospace);
-    color: var(--status-offline-text);
-    background-color: var(--status-offline-bg);
-    border: 1px solid var(--status-offline-border);
+    color: var(--status-critical);
+  }
+  .badge-critical::before, .status-critical::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--status-critical);
   }
 
-  .badge-critical {
+  .badge-offline, .status-offline {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
+    gap: 0.375rem;
     font-size: 0.6875rem;
     font-weight: 600;
     font-family: var(--font-mono, monospace);
-    color: var(--status-critical-text);
-    background-color: var(--status-critical-bg);
-    border: 1px solid var(--status-critical-border);
+    color: var(--status-offline);
+  }
+  .badge-offline::before, .status-offline::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--status-offline);
   }
 
-  .badge-warning {
+  .badge-info, .status-info {
     display: inline-flex;
     align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    font-family: var(--font-mono, monospace);
-    color: var(--status-degraded-text);
-    background-color: var(--status-degraded-bg);
-    border: 1px solid var(--status-degraded-border);
-  }
-
-  .badge-info {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.125rem 0.625rem;
-    border-radius: 9999px;
+    gap: 0.375rem;
     font-size: 0.6875rem;
     font-weight: 600;
     font-family: var(--font-mono, monospace);
     color: var(--accent-primary-text);
-    background-color: var(--accent-primary-subtle);
-    border: 1px solid var(--accent-primary-border);
+  }
+  .badge-info::before, .status-info::before {
+    content: '';
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 9999px;
+    background-color: var(--accent-primary);
   }
 
   /* ==========================================================================
@@ -352,18 +311,17 @@
      ========================================================================== */
   .form-input {
     width: 100%;
-    padding: 0.5rem 0.75rem;
+    padding: 0.4375rem 0.625rem;
     font-size: 0.8125rem;
-    border-radius: 0.5rem;
+    border-radius: 0.375rem;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-default);
     color: var(--text-primary);
-    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    transition: border-color 0.15s ease;
   }
   .form-input:focus {
     outline: none;
     border-color: var(--accent-primary);
-    box-shadow: 0 0 0 3px var(--accent-primary-subtle);
   }
   .form-input::placeholder {
     color: var(--text-faint);
@@ -377,7 +335,7 @@
     border-spacing: 0;
   }
   .data-table th {
-    padding: 0.75rem 1rem;
+    padding: 0.625rem 0.875rem;
     font-size: 0.6875rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -387,7 +345,7 @@
     border-bottom: 1px solid var(--border-default);
   }
   .data-table td {
-    padding: 0.75rem 1rem;
+    padding: 0.625rem 0.875rem;
     color: var(--text-secondary);
     border-bottom: 1px solid var(--border-default);
     background-color: var(--bg-surface);
@@ -395,27 +353,14 @@
   .data-table tr:hover td {
     background-color: var(--bg-surface-hover);
   }
-
-  /* ==========================================================================
-     TELEMETRY PARAMETER METRIC CHIPS
-     ========================================================================== */
-  .metric-temp {
-    color: var(--telemetry-temp);
-  }
-  .metric-pres {
-    color: var(--telemetry-pres);
-  }
-  .metric-hum {
-    color: var(--telemetry-hum);
-  }
 }
 
 /* Background Patterns */
 .bg-grid-scientific {
-  background-image: radial-gradient(circle, var(--border-strong) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: radial-gradient(circle, var(--border-default) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 .bg-hero-subtle {
-  background: radial-gradient(circle at 50% 20%, var(--accent-primary-subtle) 0%, var(--bg-canvas) 70%);
+  background: var(--bg-canvas);
 }

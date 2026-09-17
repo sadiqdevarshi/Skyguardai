@@ -34,39 +34,39 @@ export async function renderStationsView() {
             <p class="text-xs text-content-secondary mt-0.5">Manage deployed automatic weather stations, sensor arrays, and calibration telemetry.</p>
           </div>
 
-          <button id="add-station-btn" class="btn-primary text-xs px-3.5 py-2 flex items-center space-x-1.5 self-start sm:self-auto">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-            <span>Register New AWS Node</span>
+          <button id="add-station-btn" class="btn-primary text-xs px-3.5 py-1.5 flex items-center space-x-1.5 self-start sm:self-auto">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            <span>Register New Node</span>
           </button>
         </div>
 
         <!-- Search and Filter Bar -->
-        <div class="flex flex-wrap items-center justify-between gap-3 p-3.5 bg-subtle rounded-xl border border-border">
-          <div class="flex flex-1 min-w-[240px] items-center space-x-2 bg-surface px-3 py-2 rounded-lg border border-border">
-            <svg class="w-4 h-4 text-content-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <div class="flex flex-wrap items-center justify-between gap-3 p-2.5 bg-subtle rounded-md border border-border">
+          <div class="flex flex-1 min-w-[240px] items-center space-x-2 bg-surface px-2.5 py-1.5 rounded border border-border">
+            <svg class="w-3.5 h-3.5 text-content-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             <input 
               type="text" 
               id="station-search-input" 
-              placeholder="Search by station code, name, or geographic region..."
+              placeholder="Search station code, name, or region..."
               value="${searchQuery}"
               class="w-full bg-transparent text-xs text-content-primary placeholder-content-faint focus:outline-none"
             />
           </div>
 
           <div class="flex items-center space-x-2 text-xs">
-            <select id="station-status-filter" class="form-input py-2">
+            <select id="station-status-filter" class="form-input py-1 text-xs">
               <option value="ALL" ${statusFilter === 'ALL' ? 'selected' : ''}>All Statuses</option>
               <option value="ONLINE" ${statusFilter === 'ONLINE' ? 'selected' : ''}>Online Only</option>
               <option value="DEGRADED" ${statusFilter === 'DEGRADED' ? 'selected' : ''}>Degraded Only</option>
               <option value="OFFLINE" ${statusFilter === 'OFFLINE' ? 'selected' : ''}>Offline Only</option>
             </select>
 
-            <div class="flex border border-border rounded-lg overflow-hidden">
-              <button id="view-grid-btn" class="p-2 ${viewMode === 'GRID' ? 'bg-accent text-content-inverted' : 'bg-surface text-content-muted hover:text-content-primary'}" title="Grid View">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+            <div class="flex border border-border rounded overflow-hidden">
+              <button id="view-grid-btn" class="p-1.5 ${viewMode === 'GRID' ? 'bg-accent text-content-inverted' : 'bg-surface text-content-muted hover:text-content-primary'}" title="Grid View">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
               </button>
-              <button id="view-table-btn" class="p-2 ${viewMode === 'TABLE' ? 'bg-accent text-content-inverted' : 'bg-surface text-content-muted hover:text-content-primary'}" title="Table View">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+              <button id="view-table-btn" class="p-1.5 ${viewMode === 'TABLE' ? 'bg-accent text-content-inverted' : 'bg-surface text-content-muted hover:text-content-primary'}" title="Table View">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
               </button>
             </div>
           </div>
@@ -74,43 +74,43 @@ export async function renderStationsView() {
 
         <!-- Station Results Content -->
         ${viewMode === 'GRID' ? `
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             ${filtered.map(st => `
-              <div class="atmospheric-card p-6 space-y-4 flex flex-col justify-between">
-                <div class="space-y-3">
+              <div class="atmospheric-card p-5 space-y-3 flex flex-col justify-between">
+                <div class="space-y-2.5">
                   <div class="flex items-start justify-between">
                     <div>
-                      <span class="text-xs font-mono font-bold text-accent">${st.stationCode}</span>
-                      <h3 class="text-base font-bold text-content-primary mt-0.5">${st.name}</h3>
+                      <span class="text-xs font-mono font-bold text-content-secondary">${st.stationCode}</span>
+                      <h3 class="text-sm font-bold text-content-primary mt-0.5">${st.name}</h3>
                       <span class="text-xs text-content-muted">${st.region} • ${st.elevationMeters}m MSL</span>
                     </div>
-                    <span class="${st.status === 'ONLINE' ? 'badge-online' : (st.status === 'DEGRADED' ? 'badge-degraded' : 'badge-offline')}">
+                    <span class="${st.status === 'ONLINE' ? 'status-online' : (st.status === 'DEGRADED' ? 'status-degraded' : 'status-offline')}">
                       ${st.status}
                     </span>
                   </div>
 
                   <p class="text-xs text-content-secondary leading-snug line-clamp-2">${st.description || 'Continuous meteorological boundary observation array.'}</p>
 
-                  <div class="grid grid-cols-3 gap-2 p-3 rounded-lg bg-subtle border border-border font-mono text-center text-xs">
+                  <div class="grid grid-cols-3 gap-2 p-2.5 rounded bg-subtle border border-border font-mono text-center text-xs">
                     <div>
                       <span class="text-[9px] text-content-muted uppercase block">TEMP</span>
-                      <span class="font-bold text-amber-600 dark:text-amber-400">${st.currentTemperature != null ? st.currentTemperature + '°' : '--'}</span>
+                      <span class="font-bold text-content-primary tabular-nums">${st.currentTemperature != null ? st.currentTemperature + '°' : '--'}</span>
                     </div>
                     <div>
                       <span class="text-[9px] text-content-muted uppercase block">PRES</span>
-                      <span class="font-bold text-sky-600 dark:text-sky-400">${st.currentPressure != null ? st.currentPressure : '--'}</span>
+                      <span class="font-bold text-content-primary tabular-nums">${st.currentPressure != null ? st.currentPressure : '--'}</span>
                     </div>
                     <div>
                       <span class="text-[9px] text-content-muted uppercase block">HUM</span>
-                      <span class="font-bold text-blue-600 dark:text-blue-400">${st.currentHumidity != null ? st.currentHumidity + '%' : '--'}</span>
+                      <span class="font-bold text-content-primary tabular-nums">${st.currentHumidity != null ? st.currentHumidity + '%' : '--'}</span>
                     </div>
                   </div>
                 </div>
 
-                <div class="pt-3 border-t border-border flex items-center justify-between">
+                <div class="pt-2.5 border-t border-border flex items-center justify-between">
                   <span class="text-[10px] font-mono text-content-muted">Bat: ${st.batteryLevel}%</span>
-                  <a href="#/stations/${st.id}" class="btn-primary text-xs px-3 py-1.5">
-                    Inspect Station →
+                  <a href="#/stations/${st.id}" class="btn-primary text-xs px-3 py-1">
+                    Inspect Node →
                   </a>
                 </div>
               </div>
@@ -135,20 +135,20 @@ export async function renderStationsView() {
               <tbody>
                 ${filtered.map(st => `
                   <tr>
-                    <td class="font-mono font-bold text-accent">${st.stationCode}</td>
+                    <td class="font-mono font-bold text-content-secondary">${st.stationCode}</td>
                     <td class="font-medium text-content-primary">${st.name}</td>
-                    <td>${st.region}</td>
-                    <td class="font-mono">${st.elevationMeters}m</td>
+                    <td class="text-content-muted">${st.region}</td>
+                    <td class="font-mono text-content-muted">${st.elevationMeters}m</td>
                     <td>
-                      <span class="${st.status === 'ONLINE' ? 'badge-online' : (st.status === 'DEGRADED' ? 'badge-degraded' : 'badge-offline')}">
+                      <span class="${st.status === 'ONLINE' ? 'status-online' : (st.status === 'DEGRADED' ? 'status-degraded' : 'status-offline')}">
                         ${st.status}
                       </span>
                     </td>
-                    <td class="font-mono font-bold text-amber-600 dark:text-amber-400">${st.currentTemperature != null ? st.currentTemperature + '°C' : '--'}</td>
-                    <td class="font-mono font-bold text-sky-600 dark:text-sky-400">${st.currentPressure != null ? st.currentPressure + ' hPa' : '--'}</td>
-                    <td class="font-mono font-bold text-blue-600 dark:text-blue-400">${st.currentHumidity != null ? st.currentHumidity + '%' : '--'}</td>
+                    <td class="font-mono text-content-primary tabular-nums">${st.currentTemperature != null ? st.currentTemperature + '°C' : '--'}</td>
+                    <td class="font-mono text-content-primary tabular-nums">${st.currentPressure != null ? st.currentPressure + ' hPa' : '--'}</td>
+                    <td class="font-mono text-content-primary tabular-nums">${st.currentHumidity != null ? st.currentHumidity + '%' : '--'}</td>
                     <td class="text-right">
-                      <a href="#/stations/${st.id}" class="text-xs text-accent hover:underline font-semibold">Inspect →</a>
+                      <a href="#/stations/${st.id}" class="text-xs text-accent hover:underline font-medium">Inspect →</a>
                     </td>
                   </tr>
                 `).join('')}
