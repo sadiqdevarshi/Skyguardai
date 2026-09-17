@@ -15,14 +15,14 @@ export async function renderAlertsView() {
       <div class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-y-auto max-w-7xl">
         
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-aeris-850 pb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-4">
           <div>
-            <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Alert Triage & Notification Center</h1>
-            <p class="text-xs text-slate-400 mt-0.5">Real-time alerts triggered by anomaly threshold violations.</p>
+            <h1 class="text-xl sm:text-2xl font-bold text-content-primary tracking-tight">Alert Triage & Notification Center</h1>
+            <p class="text-xs text-content-secondary mt-0.5">Real-time alerts triggered by anomaly threshold violations.</p>
           </div>
 
           <div class="flex items-center space-x-2 font-mono text-xs">
-            <span class="p-2 rounded bg-aeris-900 border border-aeris-800 text-amber-400">
+            <span class="p-2 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400 font-bold">
               ${alerts.filter(a => !a.acknowledged).length} Unacknowledged
             </span>
           </div>
@@ -31,15 +31,15 @@ export async function renderAlertsView() {
         <!-- Alert Cards Feed -->
         <div class="space-y-3">
           ${alerts.map(alert => `
-            <div class="atmospheric-card p-5 space-y-3 border ${alert.acknowledged ? 'border-aeris-850 bg-aeris-950/40 opacity-75' : (alert.severity === 'CRITICAL' ? 'border-red-800/80 bg-red-950/15' : 'border-amber-800/60 bg-amber-950/15')}">
+            <div class="atmospheric-card p-5 space-y-3 ${alert.acknowledged ? 'opacity-75' : (alert.severity === 'CRITICAL' ? 'border-rose-500/30' : 'border-amber-500/30')}">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div class="flex items-center space-x-2.5">
                   <span class="${alert.severity === 'CRITICAL' ? 'badge-critical' : 'badge-warning'} font-mono">${alert.severity}</span>
-                  <span class="font-mono font-bold text-cyan-400 text-xs">${alert.stationCode}</span>
-                  <h3 class="text-sm font-bold text-white">${alert.title}</h3>
+                  <span class="font-mono font-bold text-accent text-xs">${alert.stationCode}</span>
+                  <h3 class="text-sm font-bold text-content-primary">${alert.title}</h3>
                 </div>
 
-                <div class="flex items-center space-x-3 text-xs font-mono text-slate-400">
+                <div class="flex items-center space-x-3 text-xs font-mono text-content-muted">
                   <span>${new Date(alert.createdAt).toLocaleString()}</span>
                   ${alert.acknowledged ? `
                     <span class="badge-online">ACKNOWLEDGED (${alert.acknowledgedBy || 'operator'})</span>
@@ -51,11 +51,11 @@ export async function renderAlertsView() {
                 </div>
               </div>
 
-              <p class="text-xs text-slate-300 leading-relaxed">${alert.message}</p>
+              <p class="text-xs text-content-secondary leading-relaxed">${alert.message}</p>
 
               ${alert.anomalyId ? `
-                <div class="pt-2 border-t border-aeris-800 flex justify-end">
-                  <a href="#/anomalies/${alert.anomalyId}" class="text-xs text-cyan-400 hover:underline">
+                <div class="pt-2 border-t border-border flex justify-end">
+                  <a href="#/anomalies/${alert.anomalyId}" class="text-xs text-accent hover:underline font-medium">
                     View Associated Anomaly Record →
                   </a>
                 </div>

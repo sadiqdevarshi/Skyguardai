@@ -4,94 +4,418 @@
 
 @layer base {
   :root {
-    --color-surface-bg: #0B0F17;
-    --color-surface-card: #111827;
-    --color-surface-border: #1E293B;
-    --color-accent-teal: #06B6D4;
-    --color-accent-cyan: #22D3EE;
-    --color-accent-amber: #F59E0B;
-    --color-accent-coral: #EF4444;
+    /* ==========================================================================
+       LIGHT THEME (Primary Scientific / Enterprise Direction)
+       Clean warm/cool whites, crisp neutral surfaces, restrained accents
+       ========================================================================== */
+    --bg-canvas: #F8FAFC;
+    --bg-subtle: #F1F5F9;
+    --bg-surface: #FFFFFF;
+    --bg-surface-elevated: #FFFFFF;
+    --bg-surface-hover: #F8FAFC;
+    --bg-surface-active: #F1F5F9;
+
+    --border-subtle: #F1F5F9;
+    --border-default: #E2E8F0;
+    --border-strong: #CBD5E1;
+    --border-interactive: #94A3B8;
+
+    --text-primary: #0F172A;
+    --text-secondary: #334155;
+    --text-muted: #64748B;
+    --text-faint: #94A3B8;
+    --text-inverted: #FFFFFF;
+
+    --accent-primary: #0F766E;        /* Scientific Teal */
+    --accent-primary-hover: #0D9488;
+    --accent-primary-subtle: #F0FDFA;
+    --accent-primary-border: #99F6E4;
+    --accent-primary-text: #0F766E;
+
+    --accent-interactive: #0284C7;    /* Slate Sky Blue */
+    --accent-interactive-hover: #0369A1;
+
+    /* Telemetry Domain Colors */
+    --telemetry-temp: #D97706;        /* Temperature Bronze */
+    --telemetry-temp-bg: #FEF3C7;
+    --telemetry-temp-border: #FDE68A;
+    --telemetry-pres: #0284C7;        /* Barometric Pressure Cyan */
+    --telemetry-pres-bg: #E0F2FE;
+    --telemetry-pres-border: #BAE6FD;
+    --telemetry-hum: #2563EB;         /* Relative Humidity Blue */
+    --telemetry-hum-bg: #DBEAFE;
+    --telemetry-hum-border: #BFDBFE;
+
+    /* Semantic Status Indicators */
+    --status-online-text: #047857;
+    --status-online-bg: #ECFDF5;
+    --status-online-border: #A7F3D0;
+
+    --status-degraded-text: #B45309;
+    --status-degraded-bg: #FFFBEB;
+    --status-degraded-border: #FDE68A;
+
+    --status-offline-text: #BE123C;
+    --status-offline-bg: #FFF1F2;
+    --status-offline-border: #FECDD3;
+
+    --status-critical-text: #991B1B;
+    --status-critical-bg: #FEF2F2;
+    --status-critical-border: #FECACA;
+
+    --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03);
+    --shadow-card-hover: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    --shadow-elevated: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  }
+
+  .dark {
+    /* ==========================================================================
+       DARK THEME (Refined Neutral Charcoal / Graphite — NOT black/blue neon)
+       Deep charcoal canvas, comfortable contrast, subdued borders
+       ========================================================================== */
+    --bg-canvas: #0F141C;
+    --bg-subtle: #141B26;
+    --bg-surface: #18202D;
+    --bg-surface-elevated: #1F293A;
+    --bg-surface-hover: #222C3D;
+    --bg-surface-active: #273447;
+
+    --border-subtle: #1C2534;
+    --border-default: #263345;
+    --border-strong: #37475E;
+    --border-interactive: #4D6280;
+
+    --text-primary: #F8FAFC;
+    --text-secondary: #CBD5E1;
+    --text-muted: #94A3B8;
+    --text-faint: #64748B;
+    --text-inverted: #0F141C;
+
+    --accent-primary: #14B8A6;
+    --accent-primary-hover: #2DD4BF;
+    --accent-primary-subtle: rgba(20, 184, 166, 0.12);
+    --accent-primary-border: rgba(20, 184, 166, 0.28);
+    --accent-primary-text: #2DD4BF;
+
+    --accent-interactive: #38BDF8;
+    --accent-interactive-hover: #7DD3FC;
+
+    /* Telemetry Domain Colors */
+    --telemetry-temp: #F59E0B;
+    --telemetry-temp-bg: rgba(245, 158, 11, 0.12);
+    --telemetry-temp-border: rgba(245, 158, 11, 0.25);
+    --telemetry-pres: #38BDF8;
+    --telemetry-pres-bg: rgba(56, 189, 248, 0.12);
+    --telemetry-pres-border: rgba(56, 189, 248, 0.25);
+    --telemetry-hum: #60A5FA;
+    --telemetry-hum-bg: rgba(96, 165, 250, 0.12);
+    --telemetry-hum-border: rgba(96, 165, 250, 0.25);
+
+    /* Semantic Status Indicators */
+    --status-online-text: #34D399;
+    --status-online-bg: rgba(52, 211, 153, 0.12);
+    --status-online-border: rgba(52, 211, 153, 0.25);
+
+    --status-degraded-text: #FBBF24;
+    --status-degraded-bg: rgba(251, 191, 36, 0.12);
+    --status-degraded-border: rgba(251, 191, 36, 0.25);
+
+    --status-offline-text: #FB7185;
+    --status-offline-bg: rgba(251, 113, 133, 0.12);
+    --status-offline-border: rgba(251, 113, 133, 0.25);
+
+    --status-critical-text: #F87171;
+    --status-critical-bg: rgba(239, 68, 68, 0.12);
+    --status-critical-border: rgba(239, 68, 68, 0.25);
+
+    --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+    --shadow-card-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.35);
+    --shadow-elevated: 0 10px 20px -3px rgba(0, 0, 0, 0.45);
   }
 
   body {
-    background-color: var(--color-surface-bg);
-    color: #F1F5F9;
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
-  /* Custom scrollbar */
+  /* Refined minimal scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #0B0F17;
+    background: var(--bg-canvas);
   }
   ::-webkit-scrollbar-thumb {
-    background: #1E293B;
+    background: var(--border-default);
     border-radius: 9999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+    background: var(--border-strong);
   }
 }
 
 @layer components {
+  /* ==========================================================================
+     STANDARDIZED SURFACE CONTAINERS & CARDS
+     ========================================================================== */
   .atmospheric-card {
-    @apply bg-aeris-900/80 backdrop-blur-md border border-aeris-800/80 rounded-xl transition-all duration-300;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-card);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
   }
   .atmospheric-card:hover {
-    @apply border-aeris-700 shadow-surface-dark;
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-card-hover);
   }
+
   .editorial-card {
-    @apply bg-aeris-900/40 border border-aeris-800/60 rounded-xl transition-all duration-200;
+    background-color: var(--bg-subtle);
+    border: 1px solid var(--border-default);
+    border-radius: 0.75rem;
   }
+
+  .elevated-card {
+    background-color: var(--bg-surface-elevated);
+    border: 1px solid var(--border-default);
+    border-radius: 0.875rem;
+    box-shadow: var(--shadow-elevated);
+  }
+
+  /* ==========================================================================
+     STANDARDIZED ACTION BUTTONS
+     ========================================================================== */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-slate-950 bg-cyan-400 hover:bg-cyan-300 active:bg-cyan-500 transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-aeris-950;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.25rem;
+    border-radius: 0.5rem;
+    color: var(--text-inverted);
+    background-color: var(--accent-primary);
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    cursor: pointer;
   }
+  .btn-primary:hover {
+    background-color: var(--accent-primary-hover);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  .btn-primary:active {
+    transform: scale(0.99);
+  }
+
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-slate-200 bg-aeris-800/80 hover:bg-aeris-700/80 active:bg-aeris-700 border border-aeris-700/60 transition-colors focus:outline-none focus:ring-2 focus:ring-aeris-500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    border-radius: 0.5rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    cursor: pointer;
   }
+  .btn-secondary:hover {
+    background-color: var(--bg-surface-hover);
+    border-color: var(--border-strong);
+    color: var(--text-primary);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    color: var(--text-muted);
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .btn-ghost:hover {
+    background-color: var(--bg-subtle);
+    color: var(--text-primary);
+  }
+
   .btn-danger {
-    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-lg text-white bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors focus:outline-none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    color: #FFFFFF;
+    background-color: #DC2626;
+    border: 1px solid transparent;
+    transition: background-color 0.15s ease;
   }
+  .btn-danger:hover {
+    background-color: #B91C1C;
+  }
+
+  /* ==========================================================================
+     METEOROLOGICAL & OPERATIONAL BADGES
+     ========================================================================== */
   .badge-online {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-950/80 text-emerald-400 border border-emerald-800/60;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    color: var(--status-online-text);
+    background-color: var(--status-online-bg);
+    border: 1px solid var(--status-online-border);
   }
+
   .badge-degraded {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-950/80 text-amber-400 border border-amber-800/60;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    color: var(--status-degraded-text);
+    background-color: var(--status-degraded-bg);
+    border: 1px solid var(--status-degraded-border);
   }
+
   .badge-offline {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-950/80 text-rose-400 border border-rose-800/60;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    color: var(--status-offline-text);
+    background-color: var(--status-offline-bg);
+    border: 1px solid var(--status-offline-border);
   }
+
   .badge-critical {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-950/90 text-red-300 border border-red-800/80;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    color: var(--status-critical-text);
+    background-color: var(--status-critical-bg);
+    border: 1px solid var(--status-critical-border);
   }
+
   .badge-warning {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-950/90 text-amber-300 border border-amber-800/80;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    color: var(--status-degraded-text);
+    background-color: var(--status-degraded-bg);
+    border: 1px solid var(--status-degraded-border);
   }
+
   .badge-info {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-cyan-950/90 text-cyan-300 border border-cyan-800/80;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.625rem;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    font-family: var(--font-mono, monospace);
+    color: var(--accent-primary-text);
+    background-color: var(--accent-primary-subtle);
+    border: 1px solid var(--accent-primary-border);
   }
-  .telemetry-value {
-    @apply font-mono font-semibold tracking-tight;
+
+  /* ==========================================================================
+     FORM CONTROLS & DATA TABLES
+     ========================================================================== */
+  .form-input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    border-radius: 0.5rem;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    color: var(--text-primary);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--accent-primary-subtle);
+  }
+  .form-input::placeholder {
+    color: var(--text-faint);
+  }
+
+  .data-table {
+    width: 100%;
+    text-align: left;
+    font-size: 0.8125rem;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  .data-table th {
+    padding: 0.75rem 1rem;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    background-color: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-default);
+  }
+  .data-table td {
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-default);
+    background-color: var(--bg-surface);
+  }
+  .data-table tr:hover td {
+    background-color: var(--bg-surface-hover);
+  }
+
+  /* ==========================================================================
+     TELEMETRY PARAMETER METRIC CHIPS
+     ========================================================================== */
+  .metric-temp {
+    color: var(--telemetry-temp);
+  }
+  .metric-pres {
+    color: var(--telemetry-pres);
+  }
+  .metric-hum {
+    color: var(--telemetry-hum);
   }
 }
 
-/* Atmospheric subtle scanline or subtle mesh animation */
-.bg-atmospheric-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.08) 0%, transparent 70%);
+/* Background Patterns */
+.bg-grid-scientific {
+  background-image: radial-gradient(circle, var(--border-strong) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-.bg-hero-radial {
-  background: radial-gradient(circle at 50% 30%, rgba(14, 116, 144, 0.15) 0%, rgba(11, 15, 23, 0.8) 70%, #0B0F17 100%);
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
+.bg-hero-subtle {
+  background: radial-gradient(circle at 50% 20%, var(--accent-primary-subtle) 0%, var(--bg-canvas) 70%);
 }

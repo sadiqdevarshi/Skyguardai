@@ -21,29 +21,29 @@ export async function renderAdminView() {
       <div class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-y-auto max-w-7xl">
         
         <!-- Header -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-aeris-850 pb-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
           <div>
             <div class="flex items-center space-x-2">
               <span class="badge-critical font-mono text-[10px]">ROOT ACCESS</span>
-              <h1 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Administrative Operations Suite</h1>
+              <h1 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">Administrative Operations Suite</h1>
             </div>
-            <p class="text-xs text-slate-400 mt-0.5">Role-based access control, JVM infrastructure telemetry, and security audit trail.</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Role-based access control, JVM infrastructure telemetry, and security audit trail.</p>
           </div>
 
           <div class="flex items-center space-x-2 text-xs font-mono">
-            <span class="p-2 rounded bg-aeris-900 border border-aeris-800 text-emerald-400">JVM: ${stats.systemStatus}</span>
+            <span class="p-2 rounded bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-emerald-700 dark:text-emerald-400 font-semibold">JVM: ${stats.systemStatus}</span>
           </div>
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="flex space-x-2 border-b border-aeris-800 text-xs font-mono">
-          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'USERS' ? 'border-cyan-400 text-cyan-300' : 'border-transparent text-slate-400 hover:text-white'}" data-tab="USERS">
+        <div class="flex space-x-2 border-b border-slate-200 dark:border-slate-800 text-xs font-mono">
+          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'USERS' ? 'border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-400' : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}" data-tab="USERS">
             User Role Management (${users.length})
           </button>
-          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'SYSTEM' ? 'border-cyan-400 text-cyan-300' : 'border-transparent text-slate-400 hover:text-white'}" data-tab="SYSTEM">
+          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'SYSTEM' ? 'border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-400' : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}" data-tab="SYSTEM">
             System & JVM Telemetry
           </button>
-          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'AUDIT' ? 'border-cyan-400 text-cyan-300' : 'border-transparent text-slate-400 hover:text-white'}" data-tab="AUDIT">
+          <button class="tab-btn px-4 py-2 font-bold border-b-2 transition-colors ${currentTab === 'AUDIT' ? 'border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-400' : 'border-transparent text-slate-500 hover:text-slate-900 dark:hover:text-slate-100'}" data-tab="AUDIT">
             Security Audit Trail (${auditLogs.length})
           </button>
         </div>
@@ -51,41 +51,41 @@ export async function renderAdminView() {
         <!-- Tab Content -->
         ${currentTab === 'USERS' ? `
           <div class="atmospheric-card p-5 space-y-4">
-            <div class="flex items-center justify-between pb-2 border-b border-aeris-800">
-              <h3 class="text-sm font-bold text-white">Authorized Users & Role Assignments</h3>
-              <span class="text-xs font-mono text-slate-400">ENFORCED VIA SPRING SECURITY</span>
+            <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Authorized Users & Role Assignments</h3>
+              <span class="text-xs font-mono text-slate-500 dark:text-slate-400">ENFORCED VIA SPRING SECURITY</span>
             </div>
 
             <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs">
+              <table class="data-table">
                 <thead>
-                  <tr class="border-b border-aeris-800 font-mono text-slate-400 text-[11px]">
-                    <th class="pb-2">USERNAME</th>
-                    <th class="pb-2">NAME</th>
-                    <th class="pb-2">EMAIL</th>
-                    <th class="pb-2">CURRENT ROLE</th>
-                    <th class="pb-2">STATUS</th>
-                    <th class="pb-2 text-right">MODIFY ROLE</th>
+                  <tr>
+                    <th>USERNAME</th>
+                    <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>CURRENT ROLE</th>
+                    <th>STATUS</th>
+                    <th class="text-right">MODIFY ROLE</th>
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-aeris-850 font-mono">
+                <tbody class="font-mono">
                   ${users.map(u => `
-                    <tr class="hover:bg-aeris-900/40">
-                      <td class="py-3 font-bold text-cyan-400">${u.username}</td>
-                      <td class="py-3 text-slate-200">${u.fullName}</td>
-                      <td class="py-3 text-slate-400">${u.email}</td>
-                      <td class="py-3">
-                        <span class="px-2 py-0.5 rounded text-[10px] ${u.role === 'ROLE_ADMIN' ? 'bg-purple-950 text-purple-300 border border-purple-800' : (u.role === 'ROLE_OPERATOR' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'bg-slate-800 text-slate-300')}">
+                    <tr>
+                      <td class="font-bold text-teal-700 dark:text-teal-400">${u.username}</td>
+                      <td class="text-slate-800 dark:text-slate-200 font-sans">${u.fullName}</td>
+                      <td class="text-slate-500 dark:text-slate-400">${u.email}</td>
+                      <td>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono ${u.role === 'ROLE_ADMIN' ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/80 dark:text-amber-300 border border-amber-300 dark:border-amber-800' : (u.role === 'ROLE_OPERATOR' ? 'bg-teal-100 text-teal-800 dark:bg-teal-950/80 dark:text-teal-300 border border-teal-300 dark:border-teal-800' : 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-300 dark:border-slate-700')}">
                           ${u.role}
                         </span>
                       </td>
-                      <td class="py-3">
-                        <span class="${u.active ? 'text-emerald-400' : 'text-rose-400'}">
+                      <td>
+                        <span class="${u.active ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'} font-semibold">
                           ${u.active ? '● ACTIVE' : '○ DISABLED'}
                         </span>
                       </td>
-                      <td class="py-3 text-right">
-                        <select class="user-role-select bg-aeris-950 border border-aeris-800 text-slate-200 text-xs rounded px-2 py-1" data-id="${u.id}">
+                      <td class="text-right">
+                        <select class="user-role-select form-input text-xs py-1 px-2 font-mono" data-id="${u.id}">
                           <option value="ROLE_ADMIN" ${u.role === 'ROLE_ADMIN' ? 'selected' : ''}>ADMIN</option>
                           <option value="ROLE_OPERATOR" ${u.role === 'ROLE_OPERATOR' ? 'selected' : ''}>OPERATOR</option>
                           <option value="ROLE_ANALYST" ${u.role === 'ROLE_ANALYST' ? 'selected' : ''}>ANALYST</option>
@@ -103,43 +103,43 @@ export async function renderAdminView() {
         ${currentTab === 'SYSTEM' ? `
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="atmospheric-card p-5 space-y-2">
-              <span class="text-[10px] font-mono text-slate-400 uppercase">JVM MEMORY USAGE</span>
-              <div class="text-xl font-mono font-bold text-cyan-400">${Math.round((stats.jvmMemoryTotalBytes - stats.jvmMemoryFreeBytes) / (1024 * 1024))} MB</div>
-              <p class="text-[11px] text-slate-400 font-mono">Allocated: ${Math.round(stats.jvmMemoryTotalBytes / (1024 * 1024))} MB</p>
+              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">JVM MEMORY USAGE</span>
+              <div class="text-xl font-mono font-bold text-teal-700 dark:text-teal-400">${Math.round((stats.jvmMemoryTotalBytes - stats.jvmMemoryFreeBytes) / (1024 * 1024))} MB</div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Allocated: ${Math.round(stats.jvmMemoryTotalBytes / (1024 * 1024))} MB</p>
             </div>
 
             <div class="atmospheric-card p-5 space-y-2">
-              <span class="text-[10px] font-mono text-slate-400 uppercase">AVAILABLE PROCESSORS</span>
-              <div class="text-xl font-mono font-bold text-amber-400">${stats.activeProcessors} Cores</div>
-              <p class="text-[11px] text-slate-400 font-mono">Multi-threaded Ingestion Engine</p>
+              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">AVAILABLE PROCESSORS</span>
+              <div class="text-xl font-mono font-bold text-amber-700 dark:text-amber-400">${stats.activeProcessors} Cores</div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Multi-threaded Ingestion Engine</p>
             </div>
 
             <div class="atmospheric-card p-5 space-y-2">
-              <span class="text-[10px] font-mono text-slate-400 uppercase">BACKEND SYSTEM RUNTIME</span>
-              <div class="text-xl font-mono font-bold text-emerald-400">HEALTHY</div>
-              <p class="text-[11px] text-slate-400 font-mono">Java 26 / Spring Boot 3.3.4</p>
+              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase">BACKEND SYSTEM RUNTIME</span>
+              <div class="text-xl font-mono font-bold text-emerald-600 dark:text-emerald-400">HEALTHY</div>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">Java 26 / Spring Boot 3.3.4</p>
             </div>
           </div>
         ` : ''}
 
         ${currentTab === 'AUDIT' ? `
           <div class="atmospheric-card p-5 space-y-4">
-            <div class="flex items-center justify-between pb-2 border-b border-aeris-800">
-              <h3 class="text-sm font-bold text-white">System Audit & Compliance Log</h3>
-              <span class="text-xs font-mono text-slate-400">IMMUTABLE LOG RECORD</span>
+            <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+              <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">System Audit & Compliance Log</h3>
+              <span class="text-xs font-mono text-slate-500 dark:text-slate-400">IMMUTABLE LOG RECORD</span>
             </div>
 
             <div class="space-y-2">
               ${auditLogs.map(log => `
-                <div class="p-3 rounded-lg bg-aeris-950 border border-aeris-800 font-mono text-xs flex items-start justify-between">
+                <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 font-mono text-xs flex items-start justify-between">
                   <div class="space-y-1">
                     <div class="flex items-center space-x-2">
-                      <span class="font-bold text-cyan-400">${log.action}</span>
+                      <span class="font-bold text-teal-700 dark:text-teal-400">${log.action}</span>
                       <span class="text-slate-500">by</span>
-                      <span class="text-slate-200 font-bold">${log.username}</span>
+                      <span class="text-slate-900 dark:text-slate-200 font-bold">${log.username}</span>
                       <span class="text-[10px] text-slate-500">(${log.entityType})</span>
                     </div>
-                    <p class="text-slate-300 font-sans text-xs">${log.details}</p>
+                    <p class="text-slate-600 dark:text-slate-300 font-sans text-xs">${log.details}</p>
                   </div>
                   <span class="text-[10px] text-slate-500 shrink-0 ml-4">${new Date(log.timestamp).toLocaleString()}</span>
                 </div>

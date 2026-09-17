@@ -8,55 +8,52 @@ export default {
   theme: {
     extend: {
       colors: {
-        aeris: {
-          50: '#F8FAFC',
-          100: '#F1F5F9',
-          200: '#E2E8F0',
-          300: '#CBD5E1',
-          400: '#94A3B8',
-          500: '#64748B',
-          600: '#475569',
-          700: '#334155',
-          800: '#1E293B',
-          900: '#0F172A',
-          950: '#0B0F17',
+        canvas: 'var(--bg-canvas)',
+        subtle: 'var(--bg-subtle)',
+        surface: {
+          DEFAULT: 'var(--bg-surface)',
+          elevated: 'var(--bg-surface-elevated)',
+          hover: 'var(--bg-surface-hover)',
+          active: 'var(--bg-surface-active)'
         },
-        cyan: {
-          glow: '#22D3EE',
-          deep: '#0891B2',
-          dark: '#164E63'
+        border: {
+          subtle: 'var(--border-subtle)',
+          DEFAULT: 'var(--border-default)',
+          strong: 'var(--border-strong)',
+          interactive: 'var(--border-interactive)'
         },
-        thermal: {
-          500: '#F59E0B',
-          600: '#D97706',
-          alert: '#EF4444'
+        content: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          muted: 'var(--text-muted)',
+          faint: 'var(--text-faint)',
+          inverted: 'var(--text-inverted)'
         },
-        pressure: {
-          500: '#06B6D4',
-          600: '#0891B2'
+        accent: {
+          DEFAULT: 'var(--accent-primary)',
+          hover: 'var(--accent-primary-hover)',
+          subtle: 'var(--accent-primary-subtle)',
+          border: 'var(--accent-primary-border)',
+          text: 'var(--accent-primary-text)'
         },
-        humidity: {
-          500: '#3B82F6',
-          600: '#2563EB'
+        interactive: {
+          DEFAULT: 'var(--accent-interactive)',
+          hover: 'var(--accent-interactive-hover)'
+        },
+        telemetry: {
+          temp: 'var(--telemetry-temp)',
+          pres: 'var(--telemetry-pres)',
+          hum: 'var(--telemetry-hum)'
         }
       },
       fontFamily: {
-        sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Plus Jakarta Sans', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['JetBrains Mono', 'Space Mono', 'Consolas', 'monospace']
       },
       boxShadow: {
-        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.25)',
-        'glow-coral': '0 0 25px -5px rgba(239, 68, 68, 0.25)',
-        'surface': '0 10px 30px -10px rgba(0, 0, 0, 0.1)',
-        'surface-dark': '0 20px 40px -15px rgba(0, 0, 0, 0.5)'
-      },
-      backgroundImage: {
-        'grid-pattern': "radial-gradient(circle, rgba(148, 163, 184, 0.12) 1px, transparent 1px)",
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-      },
-      backgroundSize: {
-        'grid-sm': '24px 24px',
-        'grid-md': '32px 32px'
+        card: 'var(--shadow-card)',
+        'card-hover': 'var(--shadow-card-hover)',
+        elevated: 'var(--shadow-elevated)'
       }
     },
   },

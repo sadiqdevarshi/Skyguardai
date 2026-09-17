@@ -16,8 +16,8 @@ export async function renderAnomalyDetailView(anomalyId) {
     <div class="flex-1 p-4 sm:p-6 lg:p-8 space-y-6 overflow-y-auto max-w-7xl">
       
       <!-- Breadcrumb & Header -->
-      <div class="space-y-2 border-b border-aeris-850 pb-4">
-        <a href="#/anomalies" class="text-xs text-cyan-400 hover:underline inline-flex items-center space-x-1">
+      <div class="space-y-2 border-b border-border pb-4">
+        <a href="#/anomalies" class="text-xs text-accent hover:underline inline-flex items-center space-x-1 font-medium">
           <span>← Back to Anomaly Workspace</span>
         </a>
 
@@ -25,14 +25,14 @@ export async function renderAnomalyDetailView(anomalyId) {
           <div>
             <div class="flex items-center space-x-3">
               <span class="${anomaly.severity === 'CRITICAL' ? 'badge-critical' : 'badge-warning'} font-mono text-xs">${anomaly.severity}</span>
-              <h1 class="text-2xl font-bold text-white tracking-tight">Incident #${anomaly.id}: ${anomaly.anomalyType} on ${anomaly.parameter}</h1>
+              <h1 class="text-2xl font-bold text-content-primary tracking-tight">Incident #${anomaly.id}: ${anomaly.anomalyType} on ${anomaly.parameter}</h1>
             </div>
-            <p class="text-xs text-slate-400 mt-1">Station: <strong class="text-slate-200">${anomaly.stationCode}</strong> (${anomaly.stationName}) • Region: ${anomaly.region}</p>
+            <p class="text-xs text-content-secondary mt-1">Station: <strong class="text-content-primary">${anomaly.stationCode}</strong> (${anomaly.stationName}) • Region: ${anomaly.region}</p>
           </div>
 
           <!-- Status & Resolution Actions -->
           <div class="flex items-center space-x-3">
-            <span id="current-anomaly-status" class="px-3 py-1 rounded-full text-xs font-bold font-mono ${anomaly.status === 'OPEN' ? 'bg-amber-950 text-amber-300 border border-amber-800' : (anomaly.status === 'ACKNOWLEDGED' ? 'bg-cyan-950 text-cyan-300 border border-cyan-800' : 'bg-emerald-950 text-emerald-300 border border-emerald-800')}">
+            <span id="current-anomaly-status" class="px-3 py-1 rounded-full text-xs font-bold font-mono ${anomaly.status === 'OPEN' ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30' : (anomaly.status === 'ACKNOWLEDGED' ? 'bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30' : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30')}">
               ${anomaly.status}
             </span>
 
@@ -48,41 +48,41 @@ export async function renderAnomalyDetailView(anomalyId) {
       <!-- Investigation Metrics Panel -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div class="atmospheric-card p-4 space-y-1">
-          <span class="text-[10px] font-mono text-slate-400 uppercase">OBSERVED TELEMETRY</span>
-          <div class="text-2xl font-mono font-bold text-rose-400">${anomaly.observedValue}</div>
-          <div class="text-[10px] text-slate-400 font-mono">Flagged Transducer Value</div>
+          <span class="text-[10px] font-mono text-content-muted uppercase tracking-wider">OBSERVED TELEMETRY</span>
+          <div class="text-2xl font-mono font-bold text-rose-600 dark:text-rose-400">${anomaly.observedValue}</div>
+          <div class="text-[10px] text-content-muted font-mono">Flagged Transducer Value</div>
         </div>
 
         <div class="atmospheric-card p-4 space-y-1">
-          <span class="text-[10px] font-mono text-slate-400 uppercase">EXPECTED BASELINE</span>
-          <div class="text-2xl font-mono font-bold text-cyan-400">${anomaly.expectedBaselineValue != null ? anomaly.expectedBaselineValue : 'N/A'}</div>
-          <div class="text-[10px] text-slate-400 font-mono">Diurnal Model Target</div>
+          <span class="text-[10px] font-mono text-content-muted uppercase tracking-wider">EXPECTED BASELINE</span>
+          <div class="text-2xl font-mono font-bold text-sky-600 dark:text-sky-400">${anomaly.expectedBaselineValue != null ? anomaly.expectedBaselineValue : 'N/A'}</div>
+          <div class="text-[10px] text-content-muted font-mono">Diurnal Model Target</div>
         </div>
 
         <div class="atmospheric-card p-4 space-y-1">
-          <span class="text-[10px] font-mono text-slate-400 uppercase">CONFIDENCE SCORE</span>
-          <div class="text-2xl font-mono font-bold text-emerald-400">${anomaly.confidenceScore}%</div>
-          <div class="text-[10px] text-slate-400 font-mono">Statistical Certainty</div>
+          <span class="text-[10px] font-mono text-content-muted uppercase tracking-wider">CONFIDENCE SCORE</span>
+          <div class="text-2xl font-mono font-bold text-emerald-600 dark:text-emerald-400">${anomaly.confidenceScore}%</div>
+          <div class="text-[10px] text-content-muted font-mono">Statistical Certainty</div>
         </div>
 
         <div class="atmospheric-card p-4 space-y-1">
-          <span class="text-[10px] font-mono text-slate-400 uppercase">DETECTED TIMESTAMP</span>
-          <div class="text-xs font-mono font-bold text-slate-200 mt-1">${new Date(anomaly.detectedAt).toLocaleTimeString()}</div>
-          <div class="text-[10px] text-slate-400 font-mono">${new Date(anomaly.detectedAt).toLocaleDateString()}</div>
+          <span class="text-[10px] font-mono text-content-muted uppercase tracking-wider">DETECTED TIMESTAMP</span>
+          <div class="text-xs font-mono font-bold text-content-primary mt-1">${new Date(anomaly.detectedAt).toLocaleTimeString()}</div>
+          <div class="text-[10px] text-content-muted font-mono">${new Date(anomaly.detectedAt).toLocaleDateString()}</div>
         </div>
       </div>
 
       <!-- Anomaly Chart: Observed vs Expected Baseline with Confidence Ribbon -->
       <div class="atmospheric-card p-5 space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-aeris-800">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-border">
           <div>
-            <h3 class="text-sm font-bold text-white">Temporal Telemetry Deviation vs Statistical Envelope</h3>
-            <span class="text-xs text-slate-400">Observed transducer divergence against the 95% confidence meteorological envelope</span>
+            <h3 class="text-sm font-bold text-content-primary">Temporal Telemetry Deviation vs Statistical Envelope</h3>
+            <span class="text-xs text-content-muted">Observed transducer divergence against the 95% confidence meteorological envelope</span>
           </div>
           <div class="flex items-center space-x-3 font-mono text-xs">
-            <span class="text-rose-400">● Observed Event</span>
-            <span class="text-cyan-400">--- Expected Baseline</span>
-            <span class="text-slate-400">■ 95% Confidence Band</span>
+            <span class="text-rose-600 dark:text-rose-400 font-medium">● Observed Event</span>
+            <span class="text-sky-600 dark:text-sky-400 font-medium">--- Expected Baseline</span>
+            <span class="text-content-muted font-medium">■ 95% Confidence Band</span>
           </div>
         </div>
 
@@ -97,26 +97,26 @@ export async function renderAnomalyDetailView(anomalyId) {
         <!-- Root Cause Analysis -->
         <div class="atmospheric-card p-6 space-y-3 border-l-4 border-l-amber-500">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-100">Meteorological & Physical Diagnosis</h3>
-            <span class="text-[10px] font-mono text-amber-400">ROOT CAUSE</span>
+            <h3 class="text-sm font-bold text-content-primary">Meteorological & Physical Diagnosis</h3>
+            <span class="text-[10px] font-mono text-amber-600 dark:text-amber-400 font-bold">ROOT CAUSE</span>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed font-sans">${anomaly.rootCauseExplanation}</p>
-          <div class="pt-2 border-t border-aeris-800 text-[11px] font-mono text-slate-400 space-y-1">
-            <div>Cross-Parameter Corroboration: <strong class="text-cyan-400">ISOLATED CHANNEL</strong></div>
-            <div>Neighboring Station Delta Check: <strong class="text-slate-200">NO CORRELATION</strong></div>
+          <p class="text-xs text-content-secondary leading-relaxed font-sans">${anomaly.rootCauseExplanation}</p>
+          <div class="pt-2 border-t border-border text-[11px] font-mono text-content-muted space-y-1">
+            <div>Cross-Parameter Corroboration: <strong class="text-accent">ISOLATED CHANNEL</strong></div>
+            <div>Neighboring Station Delta Check: <strong class="text-content-primary">NO CORRELATION</strong></div>
           </div>
         </div>
 
         <!-- Recommended Action -->
-        <div class="atmospheric-card p-6 space-y-3 border-l-4 border-l-cyan-500">
+        <div class="atmospheric-card p-6 space-y-3 border-l-4 border-l-teal-600 dark:border-l-teal-400">
           <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-slate-100">Prescribed Engineering Action</h3>
-            <span class="text-[10px] font-mono text-cyan-400">REMEDIATION</span>
+            <h3 class="text-sm font-bold text-content-primary">Prescribed Engineering Action</h3>
+            <span class="text-[10px] font-mono text-accent font-bold">REMEDIATION</span>
           </div>
-          <p class="text-xs text-slate-300 leading-relaxed font-sans">${anomaly.recommendedAction}</p>
-          <div class="pt-2 border-t border-aeris-800 text-[11px] font-mono text-slate-400 space-y-1">
-            <div>Suggested Action: <strong class="text-amber-400">ON-SITE RE-CALIBRATION / POWER RESET</strong></div>
-            <div>Dispatch Priority: <strong class="text-white">${anomaly.severity}</strong></div>
+          <p class="text-xs text-content-secondary leading-relaxed font-sans">${anomaly.recommendedAction}</p>
+          <div class="pt-2 border-t border-border text-[11px] font-mono text-content-muted space-y-1">
+            <div>Suggested Action: <strong class="text-amber-600 dark:text-amber-400">ON-SITE RE-CALIBRATION / POWER RESET</strong></div>
+            <div>Dispatch Priority: <strong class="text-content-primary">${anomaly.severity}</strong></div>
           </div>
         </div>
 
@@ -124,36 +124,36 @@ export async function renderAnomalyDetailView(anomalyId) {
 
       <!-- Operational Audit Timeline -->
       <div class="atmospheric-card p-5 space-y-4">
-        <h3 class="text-sm font-bold text-white pb-2 border-b border-aeris-800">Incident Lifecycle & Audit Trail</h3>
+        <h3 class="text-sm font-bold text-content-primary pb-2 border-b border-border">Incident Lifecycle & Audit Trail</h3>
         
         <div class="space-y-3 text-xs font-mono">
           <div class="flex items-start space-x-3">
-            <span class="w-2 h-2 rounded-full bg-rose-400 mt-1.5 shrink-0"></span>
+            <span class="w-2 h-2 rounded-full bg-rose-500 mt-1.5 shrink-0"></span>
             <div>
-              <span class="text-slate-200 font-bold">AUTOMATED DETECTION & ISOLATION</span>
-              <span class="text-slate-500 text-[11px] ml-2">${new Date(anomaly.detectedAt).toLocaleString()}</span>
-              <p class="text-slate-400 font-sans text-xs">Flagged by Spring Boot AnomalyDetectionService. Quality quarantine applied to station observation record.</p>
+              <span class="text-content-primary font-bold">AUTOMATED DETECTION & ISOLATION</span>
+              <span class="text-content-muted text-[11px] ml-2">${new Date(anomaly.detectedAt).toLocaleString()}</span>
+              <p class="text-content-secondary font-sans text-xs">Flagged by Spring Boot AnomalyDetectionService. Quality quarantine applied to station observation record.</p>
             </div>
           </div>
 
           ${anomaly.acknowledgedAt ? `
             <div class="flex items-start space-x-3">
-              <span class="w-2 h-2 rounded-full bg-cyan-400 mt-1.5 shrink-0"></span>
+              <span class="w-2 h-2 rounded-full bg-sky-500 mt-1.5 shrink-0"></span>
               <div>
-                <span class="text-slate-200 font-bold">OPERATOR ACKNOWLEDGEMENT</span>
-                <span class="text-slate-500 text-[11px] ml-2">${new Date(anomaly.acknowledgedAt).toLocaleString()}</span>
-                <p class="text-slate-400 font-sans text-xs">${anomaly.remarks || 'Acknowledged by duty meteorological operator.'}</p>
+                <span class="text-content-primary font-bold">OPERATOR ACKNOWLEDGEMENT</span>
+                <span class="text-content-muted text-[11px] ml-2">${new Date(anomaly.acknowledgedAt).toLocaleString()}</span>
+                <p class="text-content-secondary font-sans text-xs">${anomaly.remarks || 'Acknowledged by duty meteorological operator.'}</p>
               </div>
             </div>
           ` : ''}
 
           ${anomaly.resolvedAt ? `
             <div class="flex items-start space-x-3">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 mt-1.5 shrink-0"></span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 shrink-0"></span>
               <div>
-                <span class="text-slate-200 font-bold">INCIDENT RESOLUTION</span>
-                <span class="text-slate-500 text-[11px] ml-2">${new Date(anomaly.resolvedAt).toLocaleString()}</span>
-                <p class="text-slate-400 font-sans text-xs">Telemetry restored to nominal state.</p>
+                <span class="text-content-primary font-bold">INCIDENT RESOLUTION</span>
+                <span class="text-content-muted text-[11px] ml-2">${new Date(anomaly.resolvedAt).toLocaleString()}</span>
+                <p class="text-content-secondary font-sans text-xs">Telemetry restored to nominal state.</p>
               </div>
             </div>
           ` : ''}
@@ -178,9 +178,9 @@ export async function renderAnomalyDetailView(anomalyId) {
       showModal({
         title: `Resolve Incident #${anomaly.id}`,
         content: `
-          <div class="space-y-3">
-            <p class="text-slate-300">Enter engineering remarks or calibration outcome before marking this incident as RESOLVED:</p>
-            <textarea id="modal-resolve-remarks" rows="3" class="w-full p-2.5 bg-aeris-950 border border-aeris-800 rounded-lg text-white text-xs font-mono focus:outline-none focus:border-cyan-400" placeholder="e.g. Cleaned hygrometer mesh and recalibrated zero-point offset. Transducer readings returned to physical baseline."></textarea>
+          <div class="space-y-3 text-left">
+            <p class="text-content-secondary text-xs">Enter engineering remarks or calibration outcome before marking this incident as RESOLVED:</p>
+            <textarea id="modal-resolve-remarks" rows="3" class="form-input font-mono text-xs" placeholder="e.g. Cleaned hygrometer mesh and recalibrated zero-point offset. Transducer readings returned to physical baseline."></textarea>
           </div>
         `,
         confirmText: 'Mark Resolved',
@@ -189,7 +189,6 @@ export async function renderAnomalyDetailView(anomalyId) {
           const remarks = document.getElementById('modal-resolve-remarks').value;
           await api.updateAnomalyStatus(anomaly.id, 'RESOLVED', remarks);
           showToast(`Anomaly #${anomaly.id} marked as RESOLVED`, 'success');
-          // Reload view
           window.location.hash = '#/anomalies';
         }
       });

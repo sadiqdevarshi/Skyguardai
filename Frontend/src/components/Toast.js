@@ -3,16 +3,23 @@ export function showToast(message, type = 'info', duration = 3500) {
   if (!container) return;
 
   const toast = document.createElement('div');
-  const borderColors = {
-    info: 'border-cyan-500 bg-aeris-900/90 text-cyan-200',
-    success: 'border-emerald-500 bg-emerald-950/90 text-emerald-200',
-    warning: 'border-amber-500 bg-amber-950/90 text-amber-200',
-    error: 'border-rose-500 bg-rose-950/90 text-rose-200'
+  const typeStyles = {
+    info: 'border-teal-500 bg-white dark:bg-slate-900 text-teal-800 dark:text-teal-200 border',
+    success: 'border-emerald-500 bg-white dark:bg-slate-900 text-emerald-800 dark:text-emerald-200 border',
+    warning: 'border-amber-500 bg-white dark:bg-slate-900 text-amber-800 dark:text-amber-200 border',
+    error: 'border-rose-500 bg-white dark:bg-slate-900 text-rose-800 dark:text-rose-200 border'
   };
 
-  toast.className = `pointer-events-auto px-4 py-3 rounded-lg border shadow-lg backdrop-blur-md text-xs font-medium flex items-center space-x-2 transition-all transform duration-300 translate-y-2 opacity-0 ${borderColors[type] || borderColors.info}`;
+  const dotColors = {
+    info: 'bg-teal-500',
+    success: 'bg-emerald-500',
+    warning: 'bg-amber-500',
+    error: 'bg-rose-500'
+  };
+
+  toast.className = `pointer-events-auto px-4 py-3 rounded-lg shadow-lg text-xs font-medium flex items-center space-x-2.5 transition-all transform duration-300 translate-y-2 opacity-0 ${typeStyles[type] || typeStyles.info}`;
   toast.innerHTML = `
-    <span class="w-2 h-2 rounded-full ${type === 'error' ? 'bg-rose-400' : (type === 'warning' ? 'bg-amber-400' : 'bg-cyan-400')}"></span>
+    <span class="w-2 h-2 rounded-full ${dotColors[type] || dotColors.info}"></span>
     <span>${message}</span>
   `;
 

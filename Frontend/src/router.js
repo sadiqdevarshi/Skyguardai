@@ -112,6 +112,15 @@ export async function navigate(hash) {
 }
 
 function attachNavbarEvents() {
+  const themeBtn = document.getElementById('theme-toggle-btn');
+  if (themeBtn) {
+    themeBtn.onclick = () => {
+      import('./services/theme.js').then(({ themeManager }) => {
+        themeManager.toggleTheme();
+      });
+    };
+  }
+
   const logoutBtn = document.getElementById('nav-logout-btn');
   if (logoutBtn) {
     logoutBtn.onclick = () => {

@@ -25,25 +25,25 @@ export function renderSidebar(activeRoute = '/dashboard') {
   }
 
   return `
-    <aside class="w-64 bg-aeris-950/70 border-r border-aeris-850 p-4 flex flex-col justify-between hidden lg:flex shrink-0">
+    <aside class="w-64 bg-surface border-r border-border p-4 flex flex-col justify-between hidden lg:flex shrink-0 transition-colors duration-200">
       <div class="space-y-6">
         
         <!-- Section: Navigation -->
         <div>
-          <span class="text-[10px] font-mono uppercase tracking-widest text-slate-400 px-3">WORKSPACE</span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-content-faint px-3">WORKSPACE</span>
           <nav class="mt-2 space-y-1">
             ${links.map(link => {
               const isActive = activeRoute.startsWith(link.href.replace('#', ''));
               return `
-                <a href="${link.href}" class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg transition-all ${isActive ? 'bg-cyan-950/60 text-cyan-300 border border-cyan-800/60 shadow-sm' : 'text-slate-300 hover:text-white hover:bg-aeris-900/60'}">
+                <a href="${link.href}" class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg transition-all ${isActive ? 'bg-accent-subtle text-accent font-semibold border border-accent/20' : 'text-content-secondary hover:text-content-primary hover:bg-surface-hover'}">
                   <div class="flex items-center space-x-2.5">
-                    <svg class="w-4 h-4 ${isActive ? 'text-cyan-400' : 'text-slate-400'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-4 h-4 ${isActive ? 'text-accent' : 'text-content-muted'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="${link.icon}"></path>
                     </svg>
                     <span>${link.label}</span>
                   </div>
                   ${link.badge ? `
-                    <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800/80">${link.badge}</span>
+                    <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">${link.badge}</span>
                   ` : ''}
                 </a>
               `;
@@ -52,29 +52,29 @@ export function renderSidebar(activeRoute = '/dashboard') {
         </div>
 
         <!-- Section: Telemetry State Card -->
-        <div class="p-3 rounded-lg bg-aeris-900/40 border border-aeris-800/80 text-xs space-y-2">
+        <div class="p-3.5 rounded-lg bg-subtle border border-border text-xs space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-medium text-slate-300">Station Ingestion</span>
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="font-medium text-content-primary">Station Ingestion</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-snug">6 active AWS nodes streaming barometric, thermal & humidity telemetry.</p>
-          <div class="pt-1 border-t border-aeris-800/60 flex justify-between font-mono text-[10px] text-slate-400">
+          <p class="text-[11px] text-content-muted leading-snug">6 active AWS nodes streaming barometric, thermal & humidity telemetry.</p>
+          <div class="pt-1 border-t border-border flex justify-between font-mono text-[10px] text-content-muted">
             <span>PING: 14ms</span>
-            <span>VERIFIED: 100%</span>
+            <span class="text-emerald-600 dark:text-emerald-400 font-semibold">VERIFIED: 100%</span>
           </div>
         </div>
 
       </div>
 
       <!-- User footer -->
-      <div class="pt-4 border-t border-aeris-800/80 flex items-center justify-between text-xs">
+      <div class="pt-4 border-t border-border flex items-center justify-between text-xs">
         <div class="flex items-center space-x-2">
-          <div class="w-7 h-7 rounded-full bg-cyan-900/40 border border-cyan-500/30 flex items-center justify-center font-bold text-cyan-300 text-[11px]">
+          <div class="w-7 h-7 rounded-full bg-accent text-content-inverted flex items-center justify-center font-bold text-[11px]">
             ${user ? (user.username || 'U').charAt(0).toUpperCase() : 'G'}
           </div>
           <div class="flex flex-col">
-            <span class="text-slate-200 font-medium text-[11px]">${user ? user.fullName || user.username : 'Guest User'}</span>
-            <span class="text-[9px] font-mono text-cyan-400">${user ? user.role.replace('ROLE_', '') : 'OBSERVER'}</span>
+            <span class="text-content-primary font-medium text-[11px]">${user ? user.fullName || user.username : 'Guest User'}</span>
+            <span class="text-[9px] font-mono text-accent font-semibold">${user ? user.role.replace('ROLE_', '') : 'OBSERVER'}</span>
           </div>
         </div>
       </div>

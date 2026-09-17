@@ -1,8 +1,26 @@
 import Chart from 'chart.js/auto';
+import { themeManager } from './theme.js';
+
+function getChartColors() {
+  const isDark = themeManager.getTheme() === 'dark';
+  return {
+    gridColor: isDark ? 'rgba(51, 65, 85, 0.35)' : 'rgba(226, 232, 240, 0.8)',
+    tickColor: isDark ? '#94A3B8' : '#64748B',
+    tooltipBg: isDark ? '#18202D' : '#FFFFFF',
+    tooltipTitle: isDark ? '#F8FAFC' : '#0F172A',
+    tooltipBody: isDark ? '#CBD5E1' : '#334155',
+    tooltipBorder: isDark ? '#263345' : '#E2E8F0',
+    tempColor: isDark ? '#F59E0B' : '#D97706',
+    presColor: isDark ? '#38BDF8' : '#0284C7',
+    humColor: isDark ? '#60A5FA' : '#2563EB',
+    errorColor: isDark ? '#F87171' : '#DC2626'
+  };
+}
 
 export function createTelemetryChart(canvas, observations, options = {}) {
   if (!canvas) return null;
 
+  const c = getChartColors();
   const labels = observations.map(o => {
     const d = new Date(o.timestamp);
     return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`;
@@ -20,8 +38,8 @@ export function createTelemetryChart(canvas, observations, options = {}) {
         {
           label: 'Temperature (°C)',
           data: temperatures,
-          borderColor: '#F59E0B',
-          backgroundColor: 'rgba(245, 158, 11, 0.08)',
+          borderColor: c.tempColor,
+          backgroundColor: 'rgba(217, 119, 6, 0.08)',
           borderWidth: 2,
           pointRadius: 2,
           pointHoverRadius: 5,
@@ -32,7 +50,7 @@ export function createTelemetryChart(canvas, observations, options = {}) {
         {
           label: 'Pressure (hPa)',
           data: pressures,
-          borderColor: '#06B6D4',
+          borderColor: c.presColor,
           backgroundColor: 'transparent',
           borderWidth: 2,
           pointRadius: 2,
@@ -43,7 +61,7 @@ export function createTelemetryChart(canvas, observations, options = {}) {
         {
           label: 'Humidity (%)',
           data: humidities,
-          borderColor: '#3B82F6',
+          borderColor: c.humColor,
           backgroundColor: 'transparent',
           borderWidth: 1.5,
           borderDash: [4, 4],
@@ -65,41 +83,42 @@ export function createTelemetryChart(canvas, observations, options = {}) {
         legend: {
           position: 'top',
           labels: {
-            color: '#94A3B8',
-            font: { family: 'Plus Jakarta Sans', size: 12 }
+            color: c.tickColor,
+            font: { family: 'Plus Jakarta Sans', size: 11, weight: '500' }
           }
         },
         tooltip: {
-          backgroundColor: '#0F172A',
-          titleColor: '#F8FAFC',
-          bodyColor: '#CBD5E1',
-          borderColor: '#334155',
+          backgroundColor: c.tooltipBg,
+          titleColor: c.tooltipTitle,
+          bodyColor: c.tooltipBody,
+          borderColor: c.tooltipBorder,
           borderWidth: 1,
           padding: 10,
           boxPadding: 4,
-          usePointStyle: true
+          usePointStyle: true,
+          boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
         }
       },
       scales: {
         x: {
-          grid: { color: 'rgba(51, 65, 85, 0.3)' },
-          ticks: { color: '#64748B', font: { family: 'JetBrains Mono', size: 10 } }
+          grid: { color: c.gridColor },
+          ticks: { color: c.tickColor, font: { family: 'JetBrains Mono', size: 10 } }
         },
         yTemp: {
           type: 'linear',
           display: true,
           position: 'left',
-          grid: { color: 'rgba(51, 65, 85, 0.3)' },
-          ticks: { color: '#F59E0B', font: { family: 'JetBrains Mono', size: 10 } },
-          title: { display: true, text: 'Temp (°C)', color: '#F59E0B', font: { size: 10 } }
+          grid: { color: c.gridColor },
+          ticks: { color: c.tempColor, font: { family: 'JetBrains Mono', size: 10 } },
+          title: { display: true, text: 'Temp (°C)', color: c.tempColor, font: { size: 10 } }
         },
         yPres: {
           type: 'linear',
           display: true,
           position: 'right',
           grid: { drawOnChartArea: false },
-          ticks: { color: '#06B6D4', font: { family: 'JetBrains Mono', size: 10 } },
-          title: { display: true, text: 'hPa', color: '#06B6D4', font: { size: 10 } }
+          ticks: { color: c.presColor, font: { family: 'JetBrains Mono', size: 10 } },
+          title: { display: true, text: 'hPa', color: c.presColor, font: { size: 10 } }
         },
         yHum: {
           type: 'linear',
@@ -116,6 +135,7 @@ export function createTelemetryChart(canvas, observations, options = {}) {
 export function createAnomalyInvestigationChart(canvas, anomaly) {
   if (!canvas || !anomaly) return null;
 
+  const c = getChartColors();
   const points = 12;
   const labels = [];
   const baseline = [];
@@ -135,7 +155,6 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
       lowerConfidence.push(normal - 3.0);
       observed.push(normal + (Math.random() * 0.4 - 0.2));
     } else if (i === points - 2) {
-      // The anomaly event point
       baseline.push(baseVal);
       upperConfidence.push(baseVal + 3.0);
       lowerConfidence.push(baseVal - 3.0);
@@ -156,20 +175,20 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
         {
           label: 'Observed Telemetry',
           data: observed,
-          borderColor: '#EF4444',
-          backgroundColor: 'rgba(239, 68, 68, 0.15)',
+          borderColor: c.errorColor,
+          backgroundColor: 'rgba(239, 68, 68, 0.12)',
           borderWidth: 2.5,
-          pointRadius: (ctx) => (ctx.dataIndex === points - 2 ? 7 : 3),
-          pointBackgroundColor: (ctx) => (ctx.dataIndex === points - 2 ? '#EF4444' : '#F87171'),
+          pointRadius: (ctx) => (ctx.dataIndex === points - 2 ? 6 : 3),
+          pointBackgroundColor: (ctx) => (ctx.dataIndex === points - 2 ? c.errorColor : '#F87171'),
           pointBorderColor: '#FFF',
-          pointBorderWidth: 2,
+          pointBorderWidth: 1.5,
           fill: false,
           tension: 0.2
         },
         {
           label: 'Expected Baseline',
           data: baseline,
-          borderColor: '#06B6D4',
+          borderColor: c.presColor,
           borderWidth: 2,
           borderDash: [5, 5],
           pointRadius: 0,
@@ -178,16 +197,16 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
         {
           label: 'Upper Confidence (95%)',
           data: upperConfidence,
-          borderColor: 'rgba(148, 163, 184, 0.2)',
+          borderColor: 'rgba(148, 163, 184, 0.3)',
           borderWidth: 1,
           pointRadius: 0,
           fill: '+1',
-          backgroundColor: 'rgba(6, 182, 212, 0.05)'
+          backgroundColor: 'rgba(14, 165, 233, 0.05)'
         },
         {
           label: 'Lower Confidence (95%)',
           data: lowerConfidence,
-          borderColor: 'rgba(148, 163, 184, 0.2)',
+          borderColor: 'rgba(148, 163, 184, 0.3)',
           borderWidth: 1,
           pointRadius: 0,
           fill: false
@@ -200,26 +219,34 @@ export function createAnomalyInvestigationChart(canvas, anomaly) {
       plugins: {
         legend: {
           position: 'top',
-          labels: { color: '#94A3B8', font: { family: 'Plus Jakarta Sans', size: 11 } }
+          labels: { color: c.tickColor, font: { family: 'Plus Jakarta Sans', size: 11 } }
+        },
+        tooltip: {
+          backgroundColor: c.tooltipBg,
+          titleColor: c.tooltipTitle,
+          bodyColor: c.tooltipBody,
+          borderColor: c.tooltipBorder,
+          borderWidth: 1
         }
       },
       scales: {
         x: {
-          grid: { color: 'rgba(51, 65, 85, 0.3)' },
-          ticks: { color: '#64748B', font: { family: 'JetBrains Mono', size: 10 } }
+          grid: { color: c.gridColor },
+          ticks: { color: c.tickColor, font: { family: 'JetBrains Mono', size: 10 } }
         },
         y: {
-          grid: { color: 'rgba(51, 65, 85, 0.3)' },
-          ticks: { color: '#94A3B8', font: { family: 'JetBrains Mono', size: 10 } }
+          grid: { color: c.gridColor },
+          ticks: { color: c.tickColor, font: { family: 'JetBrains Mono', size: 10 } }
         }
       }
     }
   });
 }
 
-export function createDistributionChart(canvas, dataMap, label = 'Anomalies', color = '#06B6D4') {
+export function createDistributionChart(canvas, dataMap, label = 'Anomalies') {
   if (!canvas || !dataMap) return null;
 
+  const c = getChartColors();
   const labels = Object.keys(dataMap).map(k => k.replace(/_/g, ' '));
   const values = Object.values(dataMap);
 
@@ -231,16 +258,16 @@ export function createDistributionChart(canvas, dataMap, label = 'Anomalies', co
         label,
         data: values,
         backgroundColor: [
-          'rgba(6, 182, 212, 0.6)',
-          'rgba(245, 158, 11, 0.6)',
-          'rgba(59, 130, 246, 0.6)',
-          'rgba(239, 68, 68, 0.6)'
+          'rgba(15, 118, 110, 0.7)',
+          'rgba(217, 119, 6, 0.7)',
+          'rgba(37, 99, 235, 0.7)',
+          'rgba(225, 29, 72, 0.7)'
         ],
         borderColor: [
-          '#06B6D4',
-          '#F59E0B',
-          '#3B82F6',
-          '#EF4444'
+          '#0F766E',
+          '#D97706',
+          '#2563EB',
+          '#E11D48'
         ],
         borderWidth: 1,
         borderRadius: 4
@@ -255,11 +282,11 @@ export function createDistributionChart(canvas, dataMap, label = 'Anomalies', co
       scales: {
         x: {
           grid: { display: false },
-          ticks: { color: '#94A3B8', font: { size: 10 } }
+          ticks: { color: c.tickColor, font: { size: 10 } }
         },
         y: {
-          grid: { color: 'rgba(51, 65, 85, 0.3)' },
-          ticks: { color: '#64748B', stepSize: 1, font: { family: 'JetBrains Mono', size: 10 } }
+          grid: { color: c.gridColor },
+          ticks: { color: c.tickColor, stepSize: 1, font: { family: 'JetBrains Mono', size: 10 } }
         }
       }
     }

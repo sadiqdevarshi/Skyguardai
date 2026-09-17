@@ -3,19 +3,19 @@ export function showModal({ title, content, onConfirm, confirmText = 'Confirm', 
   if (!container) return;
 
   container.innerHTML = `
-    <div class="bg-aeris-900 border border-aeris-700 rounded-xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
-      <div class="flex items-center justify-between pb-3 border-b border-aeris-800">
-        <h3 class="text-sm font-semibold text-slate-100">${title}</h3>
-        <button id="modal-close-btn" class="text-slate-400 hover:text-white p-1">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl max-w-lg w-full p-6 shadow-2xl space-y-4 animate-in fade-in zoom-in-95 duration-200">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
+        <h3 class="text-sm font-semibold text-slate-900 dark:text-slate-100">${title}</h3>
+        <button id="modal-close-btn" class="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 p-1">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
       </div>
 
-      <div class="modal-body text-xs text-slate-300 space-y-3">
+      <div class="modal-body text-xs text-slate-600 dark:text-slate-300 space-y-3">
         ${content}
       </div>
 
-      <div class="flex items-center justify-end space-x-3 pt-3 border-t border-aeris-800">
+      <div class="flex items-center justify-end space-x-3 pt-3 border-t border-slate-200 dark:border-slate-800">
         <button id="modal-cancel-btn" class="btn-secondary text-xs px-3 py-1.5">Cancel</button>
         <button id="modal-confirm-btn" class="${confirmClass} text-xs px-4 py-1.5">${confirmText}</button>
       </div>
