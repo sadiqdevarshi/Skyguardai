@@ -3,7 +3,7 @@ import { renderSidebar } from '../components/Sidebar.js';
 import { showToast } from '../components/Toast.js';
 
 export async function renderSettingsView() {
-  const user = auth.getUser() || { username: 'operator', fullName: 'Lead Station Operator', role: 'ROLE_OPERATOR', email: 'operator@aerisence.io' };
+  const user = auth.getUser() || { username: 'operator', fullName: 'Lead Station Operator', role: 'ROLE_OPERATOR', email: 'operator@skyguard.ai' };
 
   const container = document.createElement('div');
   container.className = 'flex-1 flex w-full min-h-[calc(100vh-4rem)]';
@@ -30,7 +30,7 @@ export async function renderSettingsView() {
           </div>
           <div>
             <span class="text-content-muted font-mono text-xs block mb-1">OFFICIAL EMAIL</span>
-            <input type="email" value="${user.email || 'operator@aerisence.io'}" class="form-input text-xs" />
+            <input type="email" value="${user.email || 'operator@skyguard.ai'}" class="form-input text-xs" />
           </div>
           <div>
             <span class="text-content-muted font-mono text-xs block mb-1">OPERATIONAL ROLE</span>

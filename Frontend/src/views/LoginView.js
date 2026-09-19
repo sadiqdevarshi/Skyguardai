@@ -19,7 +19,7 @@ export async function renderLoginView() {
           <!-- Brand Badge -->
           <div class="inline-flex items-center space-x-2 px-2.5 py-1 rounded bg-surface border border-border text-[10px] font-mono text-content-secondary">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>AERISENCE INGESTION CORE</span>
+            <span>SKY GUARD AI INGESTION CORE</span>
           </div>
 
           <div class="space-y-2">
@@ -72,7 +72,7 @@ export async function renderLoginView() {
             </div>
             <h1 class="text-xl font-bold text-content-primary tracking-tight">Welcome back</h1>
           </div>
-          <p class="text-xs text-content-secondary">Sign in to your Aerisence account to access operational tools.</p>
+          <p class="text-xs text-content-secondary">Sign in to your Sky Guard AI account to access operational tools.</p>
         </div>
 
         <!-- OAuth Social Buttons (Google & Microsoft) -->
@@ -123,7 +123,7 @@ export async function renderLoginView() {
               id="login-username" 
               required
               autocomplete="username"
-              placeholder="operator@aerisence.io"
+              placeholder="operator@skyguard.ai"
               class="form-input text-xs font-mono"
             />
           </div>
@@ -206,7 +206,7 @@ export async function renderLoginView() {
   if (forgotPassBtn) {
     forgotPassBtn.onclick = () => {
       showModal({
-        title: 'Reset Aerisence Account Password',
+        title: 'Reset Sky Guard AI Account Password',
         content: `
           <div class="space-y-3">
             <p class="text-xs text-content-secondary leading-relaxed">
@@ -214,7 +214,7 @@ export async function renderLoginView() {
             </p>
             <div>
               <label class="block font-mono text-content-muted text-xs mb-1">REGISTERED EMAIL</label>
-              <input type="email" id="reset-email-input" class="form-input text-xs font-mono" placeholder="operator@aerisence.io" value="${userInput.value || ''}" />
+              <input type="email" id="reset-email-input" class="form-input text-xs font-mono" placeholder="operator@skyguard.ai" value="${userInput.value || ''}" />
             </div>
           </div>
         `,

@@ -10,7 +10,7 @@ export function renderFooter() {
               <div class="w-6 h-6 rounded bg-accent/15 border border-accent/30 flex items-center justify-center text-accent">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="w-3.5 h-3.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
               </div>
-              <span class="font-bold text-content-primary tracking-wider font-sans uppercase">AERISENCE</span>
+              <span class="font-bold text-content-primary tracking-wider font-sans uppercase">SKY GUARD AI</span>
             </div>
             <p class="text-xs text-content-muted leading-relaxed">
               Autonomous Automatic Weather Station (AWS) network telemetry verification, physical boundary checking, and meteorological anomaly intelligence.
@@ -72,7 +72,7 @@ export function renderFooter() {
 
         <!-- Bottom bar -->
         <div class="pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-content-muted space-y-2 md:space-y-0">
-          <p>© 2026 Aerisence Meteorological Intelligence Platform. Open-source under MIT License.</p>
+          <p>© 2026 Sky Guard AI Meteorological Intelligence Platform. Open-source under MIT License.</p>
           <div class="flex items-center space-x-4">
             <a href="#/technology" class="hover:text-content-primary transition-colors">Technical Docs</a>
             <a href="#/about" class="hover:text-content-primary transition-colors">Research Methodology</a>

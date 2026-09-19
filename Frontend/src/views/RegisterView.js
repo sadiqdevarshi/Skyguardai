@@ -62,7 +62,7 @@ export async function renderRegisterView() {
         
         <div class="space-y-1.5">
           <h1 class="text-xl font-bold text-content-primary tracking-tight">Create Operator Account</h1>
-          <p class="text-xs text-content-secondary">Register your credentials to access the Aerisence telemetry pipeline.</p>
+          <p class="text-xs text-content-secondary">Register your credentials to access the Sky Guard AI telemetry pipeline.</p>
         </div>
 
         <!-- Error message banner -->

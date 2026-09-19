@@ -45,11 +45,11 @@ export async function renderAboutView() {
       </div>
     </div>
 
-    <!-- Section 2: Aerisence Core Parameters -->
+    <!-- Section 2: Sky Guard AI Core Parameters -->
     <div class="space-y-6">
       <div class="space-y-1">
         <h2 class="text-xl sm:text-2xl font-bold text-content-primary">Monitored Atmospheric Parameters</h2>
-        <p class="text-xs sm:text-sm text-content-muted">Aerisence focuses deeply on the three foundational meteorological state variables:</p>
+        <p class="text-xs sm:text-sm text-content-muted">Sky Guard AI focuses deeply on the three foundational meteorological state variables:</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -96,11 +96,11 @@ export async function renderAboutView() {
       </div>
     </div>
 
-    <!-- Section 3: The Aerisence Approach -->
+    <!-- Section 3: The Sky Guard AI Approach -->
     <div class="atmospheric-card p-6 sm:p-8 space-y-4">
       <h2 class="text-xl font-bold text-content-primary">Deterministic Physical Boundaries & Algorithmic Triage</h2>
       <p class="text-xs sm:text-sm text-content-secondary leading-relaxed">
-        Aerisence treats weather stations not as raw numbers on a chart, but as physical measurement nodes subject to atmospheric dynamics. By enforcing thermodynamic continuity checks and variance gates before telemetry enters permanent storage, station networks maintain publication-grade data integrity.
+        Sky Guard AI treats weather stations not as raw numbers on a chart, but as physical measurement nodes subject to atmospheric dynamics. By enforcing thermodynamic continuity checks and variance gates before telemetry enters permanent storage, station networks maintain publication-grade data integrity.
       </p>
       <div class="pt-2 flex flex-wrap gap-4">
         <a href="#/monitoring" class="btn-primary text-xs px-4 py-2">Open Station Fleet Monitor →</a>

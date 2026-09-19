@@ -1,11 +1,11 @@
-# AERISENCE 2.0 — Precision Atmospheric Telemetry & Anomaly Intelligence
+# SKY GUARD AI — Precision Atmospheric Telemetry & Anomaly Intelligence
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Backend](https://img.shields.io/badge/Backend-Java%2017%2F21%20%7C%20Spring%20Boot%203.3.4-emerald)
 ![Frontend](https://img.shields.io/badge/Frontend-Vanilla%20JS%20%7C%20Tailwind%20%7C%20Three.js-cyan)
 ![Database](https://img.shields.io/badge/Database-PostgreSQL%20%2F%20H2-blue)
 
-**Aerisence** is an operational meteorological intelligence platform designed for Automatic Weather Station (AWS) networks. It provides autonomous quality control, real-time telemetry verification, and physical anomaly classification across terrestrial sensor deployments.
+**Sky Guard AI** is an operational meteorological intelligence platform designed for Automatic Weather Station (AWS) networks. It provides autonomous quality control, real-time telemetry verification, and physical anomaly classification across terrestrial sensor deployments.
 
 ---
 

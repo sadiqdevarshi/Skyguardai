@@ -34,7 +34,7 @@ export function renderNavbar() {
                 </svg>
               </div>
               <div class="flex flex-col">
-                <span class="font-bold text-base sm:text-lg tracking-wider text-content-primary font-sans uppercase">Aerisence</span>
+                <span class="font-bold text-base sm:text-lg tracking-wider text-content-primary font-sans uppercase">Sky Guard AI</span>
                 <span class="text-[9px] font-mono tracking-widest text-accent -mt-1 font-semibold uppercase">Meteorological Intel</span>
               </div>
             </a>

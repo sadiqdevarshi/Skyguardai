@@ -461,7 +461,7 @@ class ApiClient {
       token: "mock-jwt-token-" + Date.now(),
       id: 1,
       username: usernameOrEmail,
-      email: `${usernameOrEmail}@aerisence.io`,
+      email: `${usernameOrEmail}@skyguard.ai`,
       fullName: usernameOrEmail.toUpperCase() === 'ADMIN' ? 'Chief Systems Director' : 'Operational Analyst',
       role: usernameOrEmail.toLowerCase().includes('admin') ? 'ROLE_ADMIN' : 'ROLE_OPERATOR'
     };
@@ -495,10 +495,10 @@ class ApiClient {
     const res = await this.request('/admin/users');
     if (res && res.data) return res.data;
     return [
-      { id: 1, username: "admin", email: "admin@aerisence.io", fullName: "Chief Systems Director", role: "ROLE_ADMIN", active: true, createdAt: "2026-01-10T10:00:00" },
-      { id: 2, username: "operator", email: "operator@aerisence.io", fullName: "Lead Station Operator", role: "ROLE_OPERATOR", active: true, createdAt: "2026-02-15T14:30:00" },
-      { id: 3, username: "analyst", email: "analyst@aerisence.io", fullName: "Senior Meteorological Analyst", role: "ROLE_ANALYST", active: true, createdAt: "2026-03-01T09:15:00" },
-      { id: 4, username: "viewer", email: "viewer@aerisence.io", fullName: "Public Observer", role: "ROLE_VIEWER", active: true, createdAt: "2026-03-12T11:00:00" }
+      { id: 1, username: "admin", email: "admin@skyguard.ai", fullName: "Chief Systems Director", role: "ROLE_ADMIN", active: true, createdAt: "2026-01-10T10:00:00" },
+      { id: 2, username: "operator", email: "operator@skyguard.ai", fullName: "Lead Station Operator", role: "ROLE_OPERATOR", active: true, createdAt: "2026-02-15T14:30:00" },
+      { id: 3, username: "analyst", email: "analyst@skyguard.ai", fullName: "Senior Meteorological Analyst", role: "ROLE_ANALYST", active: true, createdAt: "2026-03-01T09:15:00" },
+      { id: 4, username: "viewer", email: "viewer@skyguard.ai", fullName: "Public Observer", role: "ROLE_VIEWER", active: true, createdAt: "2026-03-12T11:00:00" }
     ];
   }
 

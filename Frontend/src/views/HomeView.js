@@ -10,7 +10,7 @@ export async function renderHomeView() {
 
   container.innerHTML = `
     <!-- Fixed Background 3D Scroll Globe Viewport -->
-    <div id="scroll-globe-container" class="fixed inset-0 z-0 pointer-events-none opacity-85"></div>
+    <div id="scroll-globe-container" class="fixed inset-0 z-0 pointer-events-none opacity-100"></div>
 
     <!-- Background Technical Grid Overlay -->
     <div class="fixed inset-0 z-0 bg-grid-scientific opacity-30 pointer-events-none"></div>
@@ -27,7 +27,7 @@ export async function renderHomeView() {
           <!-- Scientific Status Badge -->
           <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-md border border-border bg-surface/90 backdrop-blur-sm text-[11px] font-mono text-content-secondary shadow-card">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            <span>AERISENCE OPERATIONAL TELEMETRY ENGINE • UTC SYNCED</span>
+            <span>SKY GUARD AI OPERATIONAL TELEMETRY ENGINE • UTC SYNCED</span>
           </div>
 
           <!-- Main Title -->
@@ -111,7 +111,7 @@ export async function renderHomeView() {
               Unattended remote weather stations encounter severe thermal cycling, solar radiation superheating, capacitive drift, and ice accretion. Standard database validation fails to capture subtle sensor corruption.
             </p>
             <p class="text-xs sm:text-sm text-content-secondary leading-relaxed">
-              Aerisence models the physical state of the local troposphere, applying Navier-Stokes continuity principles and diurnal solar curves before telemetry commits to long-term climate archives.
+              Sky Guard AI models the physical state of the local troposphere, applying Navier-Stokes continuity principles and diurnal solar curves before telemetry commits to long-term climate archives.
             </p>
             <div class="pt-2 flex items-center space-x-4 text-xs font-mono text-content-muted">
               <span>● Global Stream Vectoring</span>
@@ -177,7 +177,7 @@ export async function renderHomeView() {
           <span class="text-xs font-mono text-accent tracking-widest uppercase font-semibold">STAGE 03 • PHYSICAL VARIABLES</span>
           <h2 class="text-2xl sm:text-3xl font-bold text-content-primary tracking-tight">The Three Foundational State Dimensions</h2>
           <p class="text-xs sm:text-sm text-content-secondary leading-relaxed">
-            Aerisence focuses deeply on the deterministic physical interaction between Temperature, Atmospheric Pressure, and Relative Humidity.
+            Sky Guard AI focuses deeply on the deterministic physical interaction between Temperature, Atmospheric Pressure, and Relative Humidity.
           </p>
         </div>
 
@@ -233,7 +233,7 @@ export async function renderHomeView() {
             <span class="text-xs font-mono text-rose-600 dark:text-rose-400 uppercase tracking-widest font-semibold">STAGE 04 • ANOMALY ISOLATION</span>
             <h2 class="text-2xl sm:text-3xl font-bold text-content-primary tracking-tight">Algorithmic Incident Classification</h2>
             <p class="text-xs sm:text-sm text-content-secondary leading-relaxed">
-              When transducer readings diverge from the physical envelope, Aerisence isolates the signal into specific meteorological failure modes:
+              When transducer readings diverge from the physical envelope, Sky Guard AI isolates the signal into specific meteorological failure modes:
             </p>
             <ul class="space-y-2 text-xs text-content-secondary font-mono">
               <li class="flex items-center space-x-2">
